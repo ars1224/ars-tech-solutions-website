@@ -1,0 +1,4 @@
+import { Check } from 'lucide-react'
+import SectionHeading from '../components/SectionHeading'
+import { services } from '../data/siteData'
+export default function Services() { return <section className="section" id="services"><div className="container"><SectionHeading eyebrow="What we build" title="Digital solutions built around your business" text="Practical, well-made digital tools that help your business look professional, work smarter and grow with confidence." /><div className="cards services-grid">{services.map(({title,description,features,icon:Icon}) => <article className="service-card" key={title}><span className="icon-box"><Icon /></span><h3>{title}</h3><p>{description}</p><ul>{features.map(x => <li key={x}><Check />{x}</li>)}</ul></article>)}</div><div className="section-action"><a className="button button--secondary" href="#contact">Explore Our Services</a></div></div></section> }
