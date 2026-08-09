@@ -11,7 +11,7 @@ export default function HomePage() {
     <ValueStrip />
     <ServicePaths />
     <Benefits home />
-    <About />
-    <Contact />
+    <About summary />
+    <Contact context="home" />
   </>
 }

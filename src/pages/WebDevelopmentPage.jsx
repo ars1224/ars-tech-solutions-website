@@ -14,6 +14,6 @@ export default function WebDevelopmentPage() {
     <Projects />
     <Process />
     <Pricing />
-    <Contact />
+    <Contact context="web" />
   </>
 }

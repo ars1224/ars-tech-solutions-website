@@ -8,6 +8,6 @@ export default function TechSupportPage() {
     <TechSupportHero />
     <TechSupportServices />
     <TechSupportProcess />
-    <Contact />
+    <Contact context="support" />
   </>
 }

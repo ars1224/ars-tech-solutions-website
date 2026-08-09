@@ -5,6 +5,11 @@ import { navLinks } from '../data/siteData'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const pathname = window.location.pathname.replace(/\/$/, '') || '/'
+  const contextualLinks = pathname === '/web-development'
+    ? [...navLinks.slice(0, 3), { label: 'Work', href: '#work' }, ...navLinks.slice(3)]
+    : navLinks
+  const consultationLabel = pathname === '/tech-support' ? 'Request Tech Support' : pathname === '/web-development' ? 'Get a Web Consultation' : 'Get a Free Consultation'
   useEffect(() => {
     const close = (event) => event.key === 'Escape' && setOpen(false)
     window.addEventListener('keydown', close)
@@ -17,9 +22,9 @@ export default function Navbar() {
         <button className="menu-button" aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="primary-navigation" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
         <nav id="primary-navigation" className={`nav ${open ? 'nav--open' : ''}`} aria-label="Primary navigation">
           <div className="nav__links">
-            {navLinks.map(({label, href}) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
+            {contextualLinks.map(({label, href}) => <a key={`${label}-${href}`} href={href} aria-current={href === pathname ? 'page' : undefined} onClick={() => setOpen(false)}>{label}</a>)}
           </div>
-          <a className="button button--small" href="/#contact" onClick={() => setOpen(false)}>Get a Free Consultation</a>
+          <a className="button button--small" href="#contact" onClick={() => setOpen(false)}>{consultationLabel}</a>
         </nav>
       </div>
     </header>
