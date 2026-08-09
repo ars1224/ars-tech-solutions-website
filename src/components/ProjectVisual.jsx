@@ -1,8 +1,8 @@
 import { ArrowUpRight } from 'lucide-react'
 export default function ProjectVisual({ project }) {
-  return <div className={`project-visual project-visual--${project.theme}`} aria-label={`Placeholder preview for ${project.title}`} role="img">
-    <div className="project-visual__top"><span /><span /><span /></div>
-    <div className="project-visual__body"><div className="project-visual__side"><b /><i /><i /><i /></div><div className="project-visual__main"><span /><b /><div><i /><i /></div></div></div>
+  return <div className="project-visual" aria-label={`Screenshot of ${project.title}`} role="img">
+    <img src={project.image} alt="" />
+    <div className="project-visual__overlay" />
     <ArrowUpRight aria-hidden="true" />
   </div>
 }
