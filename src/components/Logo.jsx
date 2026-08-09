@@ -1,4 +1,4 @@
-import logoImage from '../assets/ars-tech-solutions-logo.png'
+import logoImage from '../assets/ars-tech-solutions-logo-transparent.png'
 
 export default function Logo({ light = false }) {
   return (
