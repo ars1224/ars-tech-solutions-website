@@ -56,13 +56,18 @@ export default function Contact({ context = 'home' }) {
   const [form, setForm] = useState(initial)
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const content = contactContent[context] || contactContent.home
   const typeOptions = context === 'web' ? webTypes : context === 'support' ? supportTypes : [...webTypes.slice(0, 5), ...supportTypes.slice(0, 5), 'Other']
   const budgetOptions = context === 'support' ? supportBudgets : webBudgets
 
-  const update = event => setForm({ ...form, [event.target.name]: event.target.value })
+  const update = event => {
+    setForm({ ...form, [event.target.name]: event.target.value })
+    setSubmitError('')
+  }
 
-  const submit = event => {
+  const submit = async event => {
     event.preventDefault()
     const next = {}
     if (!form.name.trim()) next.name = 'Please enter your full name.'
@@ -71,9 +76,27 @@ export default function Contact({ context = 'home' }) {
     if (!form.description.trim()) next.description = 'Please tell us a little about your project.'
     if (!form.preference) next.preference = 'Please choose a contact method.'
     setErrors(next)
-    if (!Object.keys(next).length) {
+    if (Object.keys(next).length) return
+
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'contact',
+          'enquiry-context': context,
+          ...form,
+        }).toString(),
+      })
+      if (!response.ok) throw new Error(`Form submission failed with status ${response.status}`)
       setSent(true)
       setForm(initial)
+    } catch {
+      setSubmitError('We could not send your enquiry right now. Please try again or email contact@arstechsolutions.com.')
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -111,13 +134,14 @@ export default function Contact({ context = 'home' }) {
               <div className="success" role="status" tabIndex="-1">
                 <CheckCircle2 />
                 <h3>Thanks for getting in touch.</h3>
-                <p>Your enquiry details have been captured in this demo. When the form backend is connected, this is where a successful enquiry will be confirmed.</p>
+                <p>Your enquiry has been sent successfully. We’ll be in touch as soon as possible.</p>
                 <button className="button button--secondary" onClick={() => setSent(false)}>Send another message</button>
               </div>
             ) : (
               <form name="contact" method="POST" data-netlify="true" onSubmit={submit} noValidate>
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="enquiry-context" value={context} />
+                <input type="hidden" name="bot-field" />
                 <div className="form-grid">
                   <Field label="Full name" name="name" value={form.name} onChange={update} error={errors.name} required />
                   <Field label="Email address" name="email" type="email" value={form.email} onChange={update} error={errors.email} required />
@@ -141,7 +165,8 @@ export default function Contact({ context = 'home' }) {
                     {errors.preference && <small className="field-error" id="preference-error">{errors.preference}</small>}
                   </div>
                 </div>
-                <button className="button form-submit" type="submit">{content.button} <ArrowRight /></button>
+                {submitError && <p className="form-submit-error" role="alert">{submitError}</p>}
+                <button className="button form-submit" type="submit" disabled={submitting}>{submitting ? 'Sending…' : content.button} {!submitting && <ArrowRight />}</button>
                 <p className="form-note">Your information will only be used to respond to your enquiry.</p>
               </form>
             )}
