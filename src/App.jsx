@@ -1,31 +1,26 @@
+import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Hero from './sections/Hero'
-import ValueStrip from './sections/ValueStrip'
-import Services from './sections/Services'
-import Benefits from './sections/Benefits'
-import Projects from './sections/Projects'
-import Process from './sections/Process'
-import Pricing from './sections/Pricing'
-import About from './sections/About'
-import Contact from './sections/Contact'
+import HomePage from './pages/HomePage'
+import WebDevelopmentPage from './pages/WebDevelopmentPage'
+import TechSupportPage from './pages/TechSupportPage'
+
+const pages = {
+  '/': { component: HomePage, title: 'ARS Tech Solutions | Web Development & Tech Support NZ' },
+  '/web-development': { component: WebDevelopmentPage, title: 'Website & Web App Development NZ | ARS Tech Solutions' },
+  '/tech-support': { component: TechSupportPage, title: 'Tech Support Rolleston & Canterbury | ARS Tech Solutions' },
+}
 
 export default function App() {
+  const pathname = window.location.pathname.replace(/\/$/, '') || '/'
+  const page = pages[pathname] || pages['/']
+  const Page = page.component
+  useEffect(() => { document.title = page.title }, [page.title])
   return (
     <>
       <a className="skip-link" href="#main">Skip to main content</a>
       <Navbar />
-      <main id="main">
-        <Hero />
-        <ValueStrip />
-        <Services />
-        <Benefits />
-        <Projects />
-        <Process />
-        <Pricing />
-        <About />
-        <Contact />
-      </main>
+      <main id="main"><Page /></main>
       <Footer />
     </>
   )

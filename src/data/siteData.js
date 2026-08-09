@@ -1,4 +1,4 @@
-import { MonitorSmartphone, Search, BadgeDollarSign, Headphones, Code2, PanelsTopLeft, Wrench, MessagesSquare, Map, Scaling, LifeBuoy, Compass, LayoutTemplate, Braces, Rocket, Globe2, Mail, MapPin, Phone, Share2, MessageCircle } from 'lucide-react'
+import { MonitorSmartphone, Search, BadgeDollarSign, Headphones, Code2, PanelsTopLeft, Wrench, MessagesSquare, Map, Scaling, LifeBuoy, Compass, LayoutTemplate, Braces, Rocket, Globe2, Mail, MapPin, Phone, Share2, MessageCircle, Camera, MonitorCog, HardDrive, Building2, ClipboardList, ScanSearch, CircleCheckBig } from 'lucide-react'
 import kissWebImage from '../assets/projects/kiss-web-dashboard.png'
 import weddingInvitationImage from '../assets/projects/wedding-invitation.png'
 import exploreNzImage from '../assets/projects/explore-nz.png'
@@ -8,15 +8,32 @@ import weddingBudgetImage from '../assets/projects/wedding-budget.png'
 import zenfitImage from '../assets/projects/zenfit.png'
 
 export const navLinks = [
-  ['Home', 'home'], ['Services', 'services'], ['Work', 'work'], ['Process', 'process'],
-  ['Pricing', 'pricing'], ['About', 'about'], ['Contact', 'contact'],
+  { label: 'Home', href: '/' },
+  { label: 'Web Development', href: '/web-development' },
+  { label: 'Tech Support', href: '/tech-support' },
+  { label: 'Work', href: '/web-development#work' },
+  { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 export const values = [
-  { title: 'Mobile Friendly', text: 'Designed for every screen.', icon: MonitorSmartphone },
-  { title: 'SEO Ready', text: 'A strong foundation to be found.', icon: Search },
+  { title: 'Web & IT Support', text: 'Two services, one local contact.', icon: MonitorSmartphone },
+  { title: 'Clear Advice', text: 'Practical help without the jargon.', icon: Search },
   { title: 'Clear Pricing', text: 'Know what to expect upfront.', icon: BadgeDollarSign },
   { title: 'Local Support', text: 'Friendly help from Canterbury.', icon: Headphones },
+]
+
+export const techSupportServices = [
+  { title: 'Windows Setup & Reformat', description: 'A clean, reliable Windows setup for new, slow or problem computers.', icon: MonitorCog, features: ['Windows reinstallation and reformatting', 'Updates and driver installation', 'Essential software setup', 'New computer setup', 'Performance clean-up', 'Backup planning before reformatting'] },
+  { title: 'Troubleshooting & Device Help', description: 'Straightforward diagnosis and support for everyday computer and software problems.', icon: HardDrive, features: ['Slow computer troubleshooting', 'Software errors and crashes', 'Internet and Wi-Fi diagnosis', 'Printer and peripheral setup', 'Email and account troubleshooting', 'Basic malware and security checks'] },
+  { title: 'Small Business IT Support', description: 'Practical technology assistance that helps small teams stay productive.', icon: Building2, features: ['Computer and device setup', 'Microsoft 365 and email guidance', 'File backup and synchronisation', 'Basic network support', 'Software configuration', 'Ongoing support options'] },
+]
+
+export const supportSteps = [
+  { title: 'Tell us the problem', text: 'Explain what is happening, which device is affected and what you need working again.', icon: MessagesSquare },
+  { title: 'Initial assessment', text: 'We review the symptoms and identify the most practical way to investigate the issue.', icon: ScanSearch },
+  { title: 'Clear recommendation', text: 'You receive a straightforward explanation of the options, likely cost and next step.', icon: ClipboardList },
+  { title: 'Fix and handover', text: 'The agreed work is completed, checked and explained so you know what was done.', icon: CircleCheckBig },
 ]
 
 export const services = [
@@ -58,12 +75,13 @@ export const pricing = [
 
 export const contactDetails = [
   { label: 'Phone', value: '027 207 8245', href: 'tel:+64272078245', icon: Phone },
-  { label: 'Email', value: 'a.tayao1224@gmail.com', href: 'mailto:a.tayao1224@gmail.com', icon: Mail },
+  { label: 'Email', value: 'contact@arstechsolutions.com', href: 'mailto:contact@arstechsolutions.com', icon: Mail },
   { label: 'Location', value: 'Rolleston, Canterbury, New Zealand', icon: MapPin },
   { label: 'Website', value: 'arstechsolutions.com', href: 'https://arstechsolutions.com', icon: Globe2 },
 ]
 
 export const socialLinks = [
-  { label: 'Facebook', href: 'https://facebook.com/', icon: Share2 },
-  { label: 'Messenger', href: 'https://m.me/', icon: MessageCircle },
+  { label: 'Facebook', href: 'https://facebook.com/ARStechsolutions', icon: Share2 },
+  { label: 'Instagram', href: 'https://www.instagram.com/ars.techsolutions/', icon: Camera },
+  { label: 'Messenger', href: 'https://m.me/ARStechsolutions', icon: MessageCircle },
 ]

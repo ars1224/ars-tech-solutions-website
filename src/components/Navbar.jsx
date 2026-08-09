@@ -17,9 +17,9 @@ export default function Navbar() {
         <button className="menu-button" aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="primary-navigation" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
         <nav id="primary-navigation" className={`nav ${open ? 'nav--open' : ''}`} aria-label="Primary navigation">
           <div className="nav__links">
-            {navLinks.map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>)}
+            {navLinks.map(({label, href}) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
           </div>
-          <a className="button button--small" href="#contact" onClick={() => setOpen(false)}>Get a Free Consultation</a>
+          <a className="button button--small" href="/#contact" onClick={() => setOpen(false)}>Get a Free Consultation</a>
         </nav>
       </div>
     </header>

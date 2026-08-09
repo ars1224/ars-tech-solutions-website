@@ -1,12 +1,13 @@
-export default function BrowserMockup() {
-  return <div className="browser-art" role="img" aria-label="Illustration of a modern responsive business website displayed in a browser">
+import projectScreenshot from '../assets/projects/kiss-web-dashboard.png'
+
+export default function BrowserMockup({ context = 'hero' }) {
+  return <div className={`browser-art browser-art--${context}`} role="img" aria-label="ARS branded laptop mockup displaying the KISS-Web inventory dashboard">
     <div className="browser-art__bar"><span /><span /><span /><div>arstechsolutions.com</div></div>
     <div className="browser-art__screen">
-      <div className="mini-nav"><b>ARS</b><div /><div /><div /><span /></div>
-      <div className="mini-hero"><div className="mini-copy"><span /><b /><b /><i /><button aria-hidden="true" tabIndex="-1" /></div><div className="mini-graphic"><span>&lt;/&gt;</span></div></div>
-      <div className="mini-cards"><div /><div /><div /></div>
+      <img className="browser-art__project" src={projectScreenshot} alt="" />
+      <div className="browser-art__caption"><span>Featured build</span><strong>KISS-Web</strong></div>
     </div>
     <div className="code-chip code-chip--one">Responsive</div>
-    <div className="code-chip code-chip--two">SEO ready</div>
+    <div className="code-chip code-chip--two">Real project</div>
   </div>
 }
