@@ -43,3 +43,16 @@
 @media(max-width:1024px){.case-study__heading{gap:45px}.case-study__body{gap:55px}.web-service-stack article{grid-template-columns:1fr 1fr 1fr}.web-service-stack__heading{grid-column:1}.web-service-stack article>div:nth-of-type(3){grid-column:2}.web-service-stack article>.service-text-link{grid-column:3;justify-self:start}.about-page-hero__grid{gap:45px}.about-purpose__grid{gap:55px}.founder-data-section__grid{gap:45px}}
 @media(max-width:760px){.work-hero{padding:72px 0 52px}.case-grid{grid-template-columns:1fr}.case-card--featured{grid-column:auto;display:block}.case-card__body{padding:25px 21px}.case-card__meta{flex-direction:column;gap:5px}.work-cta__inner{display:block;padding:32px 24px}.work-cta .button{width:100%;margin-top:24px}.case-study__hero{padding:55px 0 90px}.case-study__heading{grid-template-columns:1fr;gap:35px;margin-top:32px}.case-study__visual{margin-top:-50px}.case-study__body{grid-template-columns:1fr;gap:50px;padding-top:60px}.case-study__body aside{position:static}.case-functions{grid-template-columns:1fr}.web-service-stack article{grid-template-columns:1fr;padding:30px 0;gap:20px}.web-service-stack__heading,.web-service-stack article>div:nth-of-type(3),.web-service-stack article>.service-text-link{grid-column:auto}.about-page-hero{padding:72px 0}.about-page-hero__grid,.about-purpose__grid,.founder-data-section__grid,.about-capabilities>.container{grid-template-columns:1fr}.about-page-mark{min-height:320px}.about-purpose__grid{gap:25px}.about-principles__grid{grid-template-columns:1fr}.about-principles article,.about-principles article+article{padding:28px 0;border-right:0;border-bottom:1px solid #d5dce7}.founder-identity{min-height:320px}.about-capabilities__primary,.about-capabilities__secondary{padding:28px 22px}.case-card__image:hover img{transform:none}}
 @media(max-width:390px){.case-card__footer{align-items:flex-start;flex-direction:column}.case-study__heading h1{font-size:2.45rem}.case-narrative h2{font-size:1.65rem}.about-page-hero h1{font-size:2.7rem}.about-page-mark{min-height:270px}.about-capabilities__primary,.about-capabilities__secondary{display:block}.about-capabilities svg{margin-bottom:20px}}
+
+/* Production QA: maintain AA contrast and preserve intrinsic project imagery. */
+.browser-art__bar > div,
+.project-meta > span,
+.featured-project .project-status,
+.service-list__number,
+.service-list__intro p {
+  color: #5e687b;
+}
+
+.featured-project__visual img {
+  height: auto;
+}
