@@ -1,7 +1,7 @@
 import projectScreenshot from '../assets/projects/kiss-web-dashboard.webp'
 
 export default function BrowserMockup({ context = 'hero' }) {
-  return <div className={`browser-art browser-art--${context}`} role="img" aria-label="ARS branded laptop mockup displaying the KISS-Web inventory dashboard">
+  return <div className={`browser-art browser-art--${context}`} role="img" aria-label="ARS Tech Solutions branded laptop mockup displaying the KISS-Web inventory dashboard">
     <div className="browser-art__bar"><span /><span /><span /><div>arstechsolutions.com</div></div>
     <div className="browser-art__screen">
       <img className="browser-art__project" src={projectScreenshot} alt="KISS-Web inventory dashboard interface" width="1887" height="989" fetchPriority={context === 'home' || context === 'hero' ? 'high' : 'auto'} />

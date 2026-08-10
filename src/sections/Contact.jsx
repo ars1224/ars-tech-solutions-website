@@ -14,7 +14,7 @@ const contactContent = {
   home: {
     eyebrow: 'Start your web project',
     title: 'Let’s talk about what you want to build',
-    text: 'Share a few details about your website or digital tool. ARS will review the project and recommend a practical next step.',
+    text: 'Share a few details about your website or digital tool. ARS Tech Solutions will review the project and recommend a practical next step.',
     asideTitle: 'Let’s make your next step clear.',
     asideText: 'No pressure and no confusing sales pitch—just a practical conversation about what will work for you or your business.',
     typeLabel: 'Service required',
