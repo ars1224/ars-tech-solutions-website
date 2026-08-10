@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import Logo from './Logo'
 import { navLinks } from '../data/siteData'
+import BookingLink from './BookingLink'
 
-export default function Navbar() {
+export default function Navbar({ pathname: suppliedPathname }) {
   const [open, setOpen] = useState(false)
-  const pathname = window.location.pathname.replace(/\/$/, '') || '/'
-  const contextualLinks = pathname === '/web-development'
-    ? [...navLinks.slice(0, 3), { label: 'Work', href: '#work' }, ...navLinks.slice(3)]
-    : navLinks
-  const consultationLabel = pathname === '/tech-support' ? 'Request Tech Support' : pathname === '/web-development' ? 'Get a Web Consultation' : 'Get a Free Consultation'
+  const pathname = suppliedPathname ?? (typeof window !== 'undefined' ? (window.location.pathname.replace(/\/$/, '') || '/') : '/')
+  const contextualLinks = navLinks
+  const consultationLabel = pathname === '/tech-support' ? 'Request Tech Support' : 'Book a Discovery Call'
   useEffect(() => {
     const close = (event) => event.key === 'Escape' && setOpen(false)
     window.addEventListener('keydown', close)
@@ -24,7 +23,7 @@ export default function Navbar() {
           <div className="nav__links">
             {contextualLinks.map(({label, href}) => <a key={`${label}-${href}`} href={href} aria-current={href === pathname ? 'page' : undefined} onClick={() => setOpen(false)}>{label}</a>)}
           </div>
-          <a className="button button--small" href="#contact" onClick={() => setOpen(false)}>{consultationLabel}</a>
+          {pathname === '/tech-support' ? <a className="button button--small" href="#contact" onClick={() => setOpen(false)}>{consultationLabel}</a> : <BookingLink className="button button--small" onClick={() => setOpen(false)}>{consultationLabel}</BookingLink>}
         </nav>
       </div>
     </header>

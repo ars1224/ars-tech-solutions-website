@@ -1,2 +1,5 @@
-import { values } from '../data/siteData'
-export default function ValueStrip() { return <section className="value-strip" aria-label="Service benefits"><div className="container value-grid">{values.map(({title,text,icon:Icon}) => <div className="value" key={title}><span><Icon /></span><div><h2>{title}</h2><p>{text}</p></div></div>)}</div></section> }
+const signals = ['Canterbury-based', 'New Zealand-focused', 'Direct developer access', 'Mobile-first builds', 'Custom solutions', 'Post-launch support']
+
+export default function ValueStrip() {
+  return <section className="trust-strip" aria-label="Why businesses work with ARS Tech Solutions"><div className="container trust-strip__inner"><p>Built for New Zealand business</p><ul>{signals.map(signal => <li key={signal}>{signal}</li>)}</ul></div></section>
+}

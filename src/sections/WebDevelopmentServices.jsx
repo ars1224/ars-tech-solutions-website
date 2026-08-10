@@ -1,0 +1,14 @@
+import { Building2, RefreshCw, PanelsTopLeft, Wrench, Check, ArrowRight } from 'lucide-react'
+import SectionHeading from '../components/SectionHeading'
+import BookingLink from '../components/BookingLink'
+
+const services = [
+  { icon: Building2, title: 'Business Websites', audience: 'New businesses, service providers and established teams that need a credible online presence.', need: 'Turn services and expertise into a clear website that helps prospective customers understand the offer and make contact.', deliverables: ['Responsive page design and development', 'Content structure and enquiry pathways', 'Contact or enquiry forms', 'Technical SEO foundations'] },
+  { icon: RefreshCw, title: 'Website Redesigns', audience: 'Businesses whose current site feels dated, unclear or difficult to use on mobile.', need: 'Keep what still works while improving structure, visual quality, usability and the path to enquiry.', deliverables: ['Current-site review', 'Revised page and content structure', 'Modern mobile-first interface', 'Migration and launch preparation'] },
+  { icon: PanelsTopLeft, title: 'Custom Web Applications', audience: 'Teams with a workflow, customer journey or internal process that standard website tools cannot support well.', need: 'Replace awkward manual steps with a focused application built around the way the business operates.', deliverables: ['Requirements and workflow planning', 'Custom interface development', 'Database-driven functionality', 'Relevant API integrations'] },
+  { icon: Wrench, title: 'Website Care & Improvements', audience: 'Businesses that need a dependable development contact after launch.', need: 'Keep the site current and useful as content, features and business priorities change.', deliverables: ['Content and feature updates', 'Bug fixes and troubleshooting', 'Performance improvements', 'Planned ongoing enhancements'] },
+]
+
+export default function WebDevelopmentServices() {
+  return <section className="section web-service-details" id="services"><div className="container"><SectionHeading eyebrow="Web development services" title="Choose the right starting point for your business" text="Each engagement is shaped around the problem to solve, the people who will use it and what the business needs to do next." align="left" /><div className="web-service-stack">{services.map(({icon:Icon,title,audience,need,deliverables}, index) => <article key={title}><div className="web-service-stack__heading"><span>0{index+1}</span><Icon /><h2>{title}</h2></div><div><h3>Who it is for</h3><p>{audience}</p></div><div><h3>What it solves</h3><p>{need}</p></div><div><h3>Typical deliverables</h3><ul>{deliverables.map(item => <li key={item}><Check />{item}</li>)}</ul></div><BookingLink className="service-text-link">Discuss this service <ArrowRight /></BookingLink></article>)}</div></div></section>
+}

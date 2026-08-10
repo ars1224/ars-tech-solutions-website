@@ -5,24 +5,64 @@ import HomePage from './pages/HomePage'
 import WebDevelopmentPage from './pages/WebDevelopmentPage'
 import TechSupportPage from './pages/TechSupportPage'
 import AboutPage from './pages/AboutPage'
+import WorkPage from './pages/WorkPage'
+import CaseStudyPage from './pages/CaseStudyPage'
+import { caseStudyBySlug } from './data/caseStudies'
+import { trackEvent } from './utils/analytics'
+import { canonicalUrl, normalisePath, pageConfig, socialImageUrl, structuredData } from './seo/siteConfig'
 
-const pages = {
-  '/': { component: HomePage, title: 'ARS Tech Solutions | Web Development & Tech Support NZ' },
-  '/web-development': { component: WebDevelopmentPage, title: 'Website & Web App Development NZ | ARS Tech Solutions' },
-  '/tech-support': { component: TechSupportPage, title: 'Tech Support Rolleston & Canterbury | ARS Tech Solutions' },
-  '/about': { component: AboutPage, title: 'About ARS Tech Solutions | Rolleston, Canterbury' },
+const pageComponents = {
+  '/': HomePage,
+  '/web-development': WebDevelopmentPage,
+  '/tech-support': TechSupportPage,
+  '/about': AboutPage,
+  '/work': WorkPage,
 }
 
-export default function App() {
-  const pathname = window.location.pathname.replace(/\/$/, '') || '/'
-  const page = pages[pathname] || pages['/']
-  const Page = page.component
-  useEffect(() => { document.title = page.title }, [page.title])
+function setMeta(selector, attribute, value) {
+  const element = document.head.querySelector(selector)
+  if (element) element.setAttribute(attribute, value)
+}
+
+export default function App({ pathname: suppliedPathname }) {
+  const pathname = normalisePath(suppliedPathname ?? (typeof window !== 'undefined' ? window.location.pathname : '/')) || '/'
+  const page = pageConfig[pathname]
+  const caseStudy = pathname.startsWith('/work/') ? caseStudyBySlug[pathname.split('/').pop()] : null
+  const Page = caseStudy ? CaseStudyPage : pageComponents[pathname]
+  useEffect(() => {
+    const canonical = canonicalUrl(pathname)
+    document.title = page.title
+    setMeta('meta[name="description"]', 'content', page.description)
+    setMeta('link[rel="canonical"]', 'href', canonical)
+    setMeta('meta[property="og:title"]', 'content', page.title)
+    setMeta('meta[property="og:description"]', 'content', page.description)
+    setMeta('meta[property="og:url"]', 'content', canonical)
+    setMeta('meta[property="og:image"]', 'content', socialImageUrl)
+    setMeta('meta[name="twitter:title"]', 'content', page.title)
+    setMeta('meta[name="twitter:description"]', 'content', page.description)
+    setMeta('meta[name="twitter:image"]', 'content', socialImageUrl)
+    const jsonLd = document.getElementById('structured-data')
+    if (jsonLd) jsonLd.textContent = JSON.stringify(structuredData(pathname))
+    const trackClick = event => {
+      const link = event.target.closest('a')
+      if (!link) return
+      const explicit = link.dataset.event
+      const href = link.getAttribute('href') || ''
+      const label = link.textContent.trim()
+      if (explicit) trackEvent(explicit, { href, label, path: pathname })
+      else if (href.startsWith('tel:')) trackEvent('phone_click', { href, path: pathname })
+      else if (href.startsWith('mailto:')) trackEvent('email_click', { href, path: pathname })
+      else if (label.includes('Book a Discovery Call')) trackEvent('discovery_call_click', { href, path: pathname })
+      else if (href === '/web-development' || href.startsWith('/web-development#')) trackEvent('service_page_cta', { href, label, path: pathname })
+    }
+    document.addEventListener('click', trackClick)
+    return () => document.removeEventListener('click', trackClick)
+  }, [page, pathname])
   return (
     <>
       <a className="skip-link" href="#main">Skip to main content</a>
-      <Navbar />
-      <main id="main"><Page /></main>
+      <Navbar pathname={pathname} />
+      <main id="main"><Page {...(caseStudy ? { study: caseStudy } : {})} /></main>
       <Footer />
     </>
   )

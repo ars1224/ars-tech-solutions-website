@@ -1,11 +1,6 @@
-import About from '../sections/About'
-import Benefits from '../sections/Benefits'
+import AboutPageContent from '../sections/AboutPageContent'
 import Contact from '../sections/Contact'
 
 export default function AboutPage() {
-  return <>
-    <About />
-    <Benefits home />
-    <Contact context="about" />
-  </>
+  return <><AboutPageContent /><Contact context="about" /></>
 }

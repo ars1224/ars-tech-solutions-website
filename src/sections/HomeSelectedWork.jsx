@@ -1,0 +1,7 @@
+import { ArrowUpRight } from 'lucide-react'
+import SectionHeading from '../components/SectionHeading'
+import { caseStudies } from '../data/caseStudies'
+
+export default function HomeSelectedWork() {
+  return <section className="section selected-work" id="work"><div className="container"><div className="work-heading"><SectionHeading eyebrow="Selected work" title="Practical digital products, thoughtfully built" text="A selection of development work showing how ARS approaches interfaces, business workflows and useful functionality." align="left" /><a href="/work" data-event="selected_work_click">View all work <ArrowUpRight /></a></div><div className="featured-projects">{caseStudies.map((study, index) => <article className={`featured-project featured-project--${index + 1}`} key={study.slug}><a className="featured-project__visual" href={`/work/${study.slug}`} data-event="selected_work_click"><img src={study.image} alt={`${study.title} interface preview`} width="1887" height="989" loading="lazy" decoding="async" /></a><div className="featured-project__content"><p className="project-kicker">{study.category}</p><h3>{study.title}</h3><dl><div><dt>The need</dt><dd>{study.need}</dd></div><div><dt>What was built</dt><dd>{study.overview}</dd></div></dl><div className="project-meta"><span>{study.technologies.slice(0,3).join(' · ')}</span><a href={`/work/${study.slug}`} data-event="selected_work_click">View project <ArrowUpRight /></a></div><p className="project-status">Status: {study.status}</p></div></article>)}</div></div></section>
+}

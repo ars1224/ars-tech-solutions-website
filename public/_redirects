@@ -1,1 +1,10 @@
-/*    /index.html   200
+# Prerendered public routes. There is intentionally no catch-all SPA rewrite:
+# Netlify serves 404.html with a genuine 404 status for unknown URLs.
+/web-development   /web-development/index.html   200
+/tech-support      /tech-support/index.html      200
+/about             /about/index.html             200
+/work              /work/index.html              200
+/work/kiss-web-inventory-system      /work/kiss-web-inventory-system/index.html      200
+/work/digital-wedding-invitation     /work/digital-wedding-invitation/index.html     200
+/work/noble-innsync-hotel-system     /work/noble-innsync-hotel-system/index.html     200
+/*                   /404.html                     404

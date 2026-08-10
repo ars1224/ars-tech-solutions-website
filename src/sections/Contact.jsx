@@ -2,6 +2,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
 import { contactDetails, socialLinks } from '../data/siteData'
+import { trackEvent } from '../utils/analytics'
 
 const initial = { name: '', email: '', phone: '', business: '', type: '', budget: '', description: '', preference: '' }
 const webTypes = ['New business website', 'Website redesign', 'E-commerce website', 'Custom web application', 'Website maintenance', 'Other web project']
@@ -11,14 +12,14 @@ const supportBudgets = ['Under NZ$100', 'NZ$100–NZ$250', 'NZ$250–NZ$500', 'O
 
 const contactContent = {
   home: {
-    eyebrow: 'Start a conversation',
-    title: 'How can we help?',
-    text: 'Tell us whether you need a website, web application or technology support. We will help you understand the most practical next step.',
+    eyebrow: 'Start your web project',
+    title: 'Let’s talk about what you want to build',
+    text: 'Share a few details about your website or digital tool. ARS will review the project and recommend a practical next step.',
     asideTitle: 'Let’s make your next step clear.',
     asideText: 'No pressure and no confusing sales pitch—just a practical conversation about what will work for you or your business.',
-    typeLabel: 'Enquiry type',
-    descriptionLabel: 'How can we help?',
-    button: 'Send My Enquiry',
+    typeLabel: 'Service required',
+    descriptionLabel: 'Short project description',
+    button: 'Book a Discovery Call',
   },
   web: {
     eyebrow: 'Web project enquiries',
@@ -28,7 +29,7 @@ const contactContent = {
     asideText: 'Tell us what you want your website to achieve. We will explain the most practical scope, approach and next step.',
     typeLabel: 'Web service',
     descriptionLabel: 'Project details',
-    button: 'Request a Web Consultation',
+    button: 'Book a Discovery Call',
   },
   support: {
     eyebrow: 'Technology support enquiries',
@@ -59,6 +60,7 @@ export default function Contact({ context = 'home' }) {
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const content = contactContent[context] || contactContent.home
+  const simpleWebEnquiry = context === 'home' || context === 'web'
   const typeOptions = context === 'web' ? webTypes : context === 'support' ? supportTypes : [...webTypes.slice(0, 5), ...supportTypes.slice(0, 5), 'Other']
   const budgetOptions = context === 'support' ? supportBudgets : webBudgets
 
@@ -74,7 +76,7 @@ export default function Contact({ context = 'home' }) {
     if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Please enter a valid email address.'
     if (!form.type) next.type = 'Please choose a project type.'
     if (!form.description.trim()) next.description = 'Please tell us a little about your project.'
-    if (!form.preference) next.preference = 'Please choose a contact method.'
+    if (!simpleWebEnquiry && !form.preference) next.preference = 'Please choose a contact method.'
     setErrors(next)
     if (Object.keys(next).length) return
 
@@ -88,9 +90,11 @@ export default function Contact({ context = 'home' }) {
           'form-name': 'contact',
           'enquiry-context': context,
           ...form,
+          preference: simpleWebEnquiry ? 'Email' : form.preference,
         }).toString(),
       })
       if (!response.ok) throw new Error(`Form submission failed with status ${response.status}`)
+      trackEvent(context === 'support' ? 'tech_support_enquiry' : 'project_enquiry_submission', { context })
       setSent(true)
       setForm(initial)
     } catch {
@@ -145,16 +149,16 @@ export default function Contact({ context = 'home' }) {
                 <div className="form-grid">
                   <Field label="Full name" name="name" value={form.name} onChange={update} error={errors.name} required />
                   <Field label="Email address" name="email" type="email" value={form.email} onChange={update} error={errors.email} required />
-                  <Field label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} />
-                  <Field label="Business name" name="business" value={form.business} onChange={update} />
+                  {!simpleWebEnquiry && <Field label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} />}
+                  {!simpleWebEnquiry && <Field label="Business name" name="business" value={form.business} onChange={update} />}
                   <Select label={content.typeLabel} name="type" value={form.type} onChange={update} options={typeOptions} error={errors.type} required />
-                  <Select label={context === 'support' ? 'Expected support budget' : 'Estimated budget'} name="budget" value={form.budget} onChange={update} options={budgetOptions} />
+                  {!simpleWebEnquiry && <Select label={context === 'support' ? 'Expected support budget' : 'Estimated budget'} name="budget" value={form.budget} onChange={update} options={budgetOptions} />}
                   <div className="field field--full">
                     <label htmlFor="description">{content.descriptionLabel} <span>*</span></label>
                     <textarea id="description" name="description" rows="5" value={form.description} onChange={update} aria-invalid={!!errors.description} aria-describedby={errors.description ? 'description-error' : undefined} />
                     {errors.description && <small className="field-error" id="description-error">{errors.description}</small>}
                   </div>
-                  <div className="field field--full">
+                  {!simpleWebEnquiry && <div className="field field--full">
                     <label htmlFor="preference">Preferred contact method <span>*</span></label>
                     <select id="preference" name="preference" value={form.preference} onChange={update} aria-invalid={!!errors.preference} aria-describedby={errors.preference ? 'preference-error' : undefined}>
                       <option value="">Choose an option</option>
@@ -163,7 +167,8 @@ export default function Contact({ context = 'home' }) {
                       <option>Messenger</option>
                     </select>
                     {errors.preference && <small className="field-error" id="preference-error">{errors.preference}</small>}
-                  </div>
+                  </div>}
+                  {simpleWebEnquiry && <input type="hidden" name="preference" value="Email" />}
                 </div>
                 {submitError && <p className="form-submit-error" role="alert">{submitError}</p>}
                 <button className="button form-submit" type="submit" disabled={submitting}>{submitting ? 'Sending…' : content.button} {!submitting && <ArrowRight />}</button>

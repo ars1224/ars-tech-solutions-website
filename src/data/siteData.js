@@ -1,15 +1,16 @@
 import { MonitorSmartphone, Search, BadgeDollarSign, Headphones, Code2, PanelsTopLeft, Wrench, MessagesSquare, Map, Scaling, LifeBuoy, Compass, LayoutTemplate, Braces, Rocket, Globe2, Mail, MapPin, Phone, Share2, MessageCircle, Camera, MonitorCog, HardDrive, Building2, ClipboardList, ScanSearch, CircleCheckBig } from 'lucide-react'
-import kissWebImage from '../assets/projects/kiss-web-dashboard.png'
-import weddingInvitationImage from '../assets/projects/wedding-invitation.png'
-import exploreNzImage from '../assets/projects/explore-nz.png'
-import nobleInnSyncImage from '../assets/projects/noble-innsync.png'
-import nzftcImage from '../assets/projects/nzftc-employee-management.png'
-import weddingBudgetImage from '../assets/projects/wedding-budget.png'
-import zenfitImage from '../assets/projects/zenfit.png'
+import kissWebImage from '../assets/projects/kiss-web-dashboard.webp'
+import weddingInvitationImage from '../assets/projects/wedding-invitation.webp'
+import exploreNzImage from '../assets/projects/explore-nz.webp'
+import nobleInnSyncImage from '../assets/projects/noble-innsync.webp'
+import nzftcImage from '../assets/projects/nzftc-employee-management.webp'
+import weddingBudgetImage from '../assets/projects/wedding-budget.webp'
+import zenfitImage from '../assets/projects/zenfit.webp'
 
 export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Web Development', href: '/web-development' },
+  { label: 'Work', href: '/work' },
   { label: 'Tech Support', href: '/tech-support' },
   { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '#contact' },
@@ -63,7 +64,7 @@ export const processSteps = [
   { title: 'Planning', text: 'We organise the page structure, content, features, timeline and project scope.', icon: LayoutTemplate },
   { title: 'Design', text: 'We create a clean interface that matches your business and works across different screen sizes.', icon: PanelsTopLeft },
   { title: 'Development', text: 'The approved design is developed, tested and prepared for launch.', icon: Braces },
-  { title: 'Launch and Support', text: 'Your website goes live, and ongoing support is available when you need it.', icon: Rocket },
+  { title: 'Launch & Support', text: 'Your website is checked, prepared for launch and supported with a clear path for future improvements.', icon: Rocket },
 ]
 
 export const pricing = [
