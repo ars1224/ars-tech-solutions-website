@@ -36,9 +36,9 @@ export const pageConfig = {
     pageName: 'Work',
   },
   '/work-with-us': {
-    title: 'Work With ARS | ARS Tech Solutions',
+    title: 'Work With ARS Tech Solutions',
     description: 'Interested in collaborating with ARS Tech Solutions? Join our network of independent web developers, designers, marketers and technology specialists.',
-    pageName: 'Work With ARS',
+    pageName: 'Work With ARS Tech Solutions',
   },
   ...Object.fromEntries(caseStudySeo.map(study => [`/work/${study.slug}`, {
     title: `${study.title} | ARS Tech Solutions Work`,

@@ -68,7 +68,7 @@ export default function ContractorInterestForm() {
       <TextArea label="Types of projects you’re interested in" name="projectInterests" value={form.projectInterests} onChange={update} error={errors.projectInterests} required />
     </div>
     {status === 'error' && <p className="form-submit-error" role="alert">We could not send your enquiry right now. Please try again or email contact@arstechsolutions.com.</p>}
-    <button className="button form-submit" type="submit" disabled={status === 'submitting'}>{status === 'submitting' ? 'Sending…' : 'Join the ARS Contractor Network'} {status !== 'submitting' && <ArrowRight />}</button>
+    <button className="button form-submit" type="submit" disabled={status === 'submitting'}>{status === 'submitting' ? 'Sending…' : 'Join the ARS Tech Solutions Contractor Network'} {status !== 'submitting' && <ArrowRight />}</button>
     <p className="form-note">Your information will only be used to consider future collaboration opportunities with ARS Tech Solutions.</p>
   </form>
 }
