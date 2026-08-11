@@ -8,13 +8,18 @@ export function discoveryCallHref() {
 }
 
 export const founder = {
-  name: null,
-  role: null,
+  name: 'Aries Tayao',
+  role: 'Founder, ARS Tech Solutions',
   shortBiography: null,
   longBiography: null,
   photograph: null,
   experience: [],
-  qualifications: [],
+  qualifications: [
+    'New Zealand Certificate in Information Technology (Level 5)',
+    'Diploma in Software Development (Level 6)',
+  ],
+  linkedin: 'https://www.linkedin.com/in/ariestayao/',
+  github: 'https://github.com/ars1224',
   location: 'Rolleston, Canterbury, New Zealand',
   philosophy: 'Clear communication, practical decisions and digital solutions shaped around real business needs.',
 }

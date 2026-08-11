@@ -7,6 +7,7 @@ import TechSupportPage from './pages/TechSupportPage'
 import AboutPage from './pages/AboutPage'
 import WorkPage from './pages/WorkPage'
 import CaseStudyPage from './pages/CaseStudyPage'
+import WorkWithUsPage from './pages/WorkWithUsPage'
 import { caseStudyBySlug } from './data/caseStudies'
 import { trackEvent } from './utils/analytics'
 import { canonicalUrl, normalisePath, pageConfig, socialImageUrl, structuredData } from './seo/siteConfig'
@@ -17,6 +18,7 @@ const pageComponents = {
   '/tech-support': TechSupportPage,
   '/about': AboutPage,
   '/work': WorkPage,
+  '/work-with-us': WorkWithUsPage,
 }
 
 function setMeta(selector, attribute, value) {
