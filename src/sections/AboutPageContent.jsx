@@ -12,7 +12,7 @@ export default function AboutPageContent() {
       <div>{founder.photograph && <img className="founder-photo founder-photo--large" src={founder.photograph} alt="Jhon Aries Tayao, Founder and Web Developer at ARS Tech Solutions" width="900" height="1125" fetchPriority="high" />}</div>
       <div><p className="eyebrow">Meet the Founder</p><h2>{founder.name}</h2><p className="founder-role">{founder.role}</p>
         <p>I’m Jhon Aries Tayao, the founder of ARS Tech Solutions. My background combines software development, web development and hands-on IT support, giving me a practical understanding of both building technology and helping people use it effectively.</p>
-        <p>I hold a New Zealand Certificate in Information Technology (Level 5) from Yoobee Colleges and am currently studying toward a Diploma in Software Development (Level 6).</p>
+        <p>I hold a New Zealand Certificate in Information Technology (Level 5) from Yoobee Colleges.</p>
         <p>My primary focus is designing and developing business websites, website redesigns and custom web applications. I also provide selected technology support services for individuals and small businesses in Canterbury.</p>
         <p>I believe good technology should be clear, practical and shaped around the people who use it. When you work with ARS Tech Solutions, you work directly with me throughout your project—from the initial conversation and planning through development, launch and ongoing improvements.</p>
         <p>This direct approach means clearer communication, fewer handovers and a solution that stays connected to the original business goal.</p>

@@ -10,12 +10,11 @@ export function discoveryCallHref() {
 export const founder = {
   name: 'Jhon Aries Tayao',
   role: 'Founder & Web Developer',
-  shortBiography: 'ARS Tech Solutions is led by Jhon Aries Tayao, a web developer and software development student based in Rolleston, Canterbury. Every project is handled directly from planning through development and launch, giving clients clear communication and fewer handovers.',
+  shortBiography: 'ARS Tech Solutions is led by Jhon Aries Tayao, a web developer based in Rolleston, Canterbury. Every project is handled directly from planning through development and launch, giving clients clear communication and fewer handovers.',
   photograph: '/jhon-aries-tayao.jpg',
   experience: [],
   qualifications: [
     { name: 'New Zealand Certificate in Information Technology (Level 5)', provider: 'Yoobee Colleges', status: 'Completed' },
-    { name: 'Diploma in Software Development (Level 6)', provider: 'Yoobee Colleges', status: 'Currently studying' },
   ],
   linkedin: 'https://www.linkedin.com/in/ariestayao/',
   github: 'https://github.com/ars1224',
