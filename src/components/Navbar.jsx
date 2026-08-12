@@ -8,7 +8,7 @@ export default function Navbar({ pathname: suppliedPathname }) {
   const [open, setOpen] = useState(false)
   const pathname = suppliedPathname ?? (typeof window !== 'undefined' ? (window.location.pathname.replace(/\/$/, '') || '/') : '/')
   const contextualLinks = navLinks
-  const consultationLabel = pathname === '/tech-support' ? 'Request Tech Support' : 'Book a Discovery Call'
+  const consultationLabel = pathname === '/tech-support' ? 'Request Tech Support' : 'Request a Discovery Call'
   useEffect(() => {
     const close = (event) => event.key === 'Escape' && setOpen(false)
     window.addEventListener('keydown', close)

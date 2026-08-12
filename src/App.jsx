@@ -8,6 +8,8 @@ import AboutPage from './pages/AboutPage'
 import WorkPage from './pages/WorkPage'
 import CaseStudyPage from './pages/CaseStudyPage'
 import WorkWithUsPage from './pages/WorkWithUsPage'
+import PrivacyPage from './pages/PrivacyPage'
+import TermsPage from './pages/TermsPage'
 import { caseStudyBySlug } from './data/caseStudies'
 import { trackEvent } from './utils/analytics'
 import { canonicalUrl, normalisePath, pageConfig, socialImageUrl, structuredData } from './seo/siteConfig'
@@ -19,6 +21,8 @@ const pageComponents = {
   '/about': AboutPage,
   '/work': WorkPage,
   '/work-with-us': WorkWithUsPage,
+  '/privacy': PrivacyPage,
+  '/terms': TermsPage,
 }
 
 function setMeta(selector, attribute, value) {
@@ -54,7 +58,7 @@ export default function App({ pathname: suppliedPathname }) {
       if (explicit) trackEvent(explicit, { href, label, path: pathname })
       else if (href.startsWith('tel:')) trackEvent('phone_click', { href, path: pathname })
       else if (href.startsWith('mailto:')) trackEvent('email_click', { href, path: pathname })
-      else if (label.includes('Book a Discovery Call')) trackEvent('discovery_call_click', { href, path: pathname })
+      else if (label.includes('Request a Discovery Call')) trackEvent('discovery_call_click', { href, path: pathname })
       else if (href === '/web-development' || href.startsWith('/web-development#')) trackEvent('service_page_cta', { href, label, path: pathname })
     }
     document.addEventListener('click', trackClick)

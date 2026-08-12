@@ -8,7 +8,7 @@ const faqs = [
   ['Can you maintain the website after launch?', 'Yes. Website care, content updates, bug fixes and ongoing improvements are available after launch.'],
   ['Who owns the website after completion?', 'Ownership, access and any third-party licensing are clarified in the project scope before work begins. Ask about the arrangement that best fits your project.'],
   ['What information do you need from me?', 'A useful first conversation covers your business, audience, goals, current website if you have one, required features and any content already available.'],
-  ['How do we get started?', 'Book a discovery call or send a short project enquiry. ARS Tech Solutions will review what you need and recommend a practical next step.'],
+  ['How do we get started?', 'Request a discovery call or send a short project enquiry. ARS Tech Solutions will review what you need and recommend a practical next step.'],
 ]
 
 export default function HomeFaq() {

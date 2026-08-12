@@ -1,5 +1,9 @@
 import { ArrowRight } from 'lucide-react'
+import { founder } from '../config/siteSettings'
 
 export default function FounderPreview() {
-  return <section className="section founder-section"><div className="container founder-section__grid"><div className="founder-photo-slot" aria-label="How clients work with ARS Tech Solutions"><p className="founder-panel__eyebrow">How ARS Tech Solutions works</p><ul><li><span>01</span><div><strong>Direct contact</strong><small>One point of contact throughout the project.</small></div></li><li><span>02</span><div><strong>Clear decisions</strong><small>Practical recommendations explained without jargon.</small></div></li><li><span>03</span><div><strong>Ongoing support</strong><small>Help remains available after launch.</small></div></li></ul><p className="founder-panel__location">Rolleston, Canterbury · New Zealand</p></div><div className="founder-copy"><p className="eyebrow">Founder-led, from start to finish</p><h2>Work directly with the person designing and developing your solution.</h2><p>ARS Tech Solutions keeps the relationship personal. From the first conversation through planning, development and support, you have one direct point of contact who understands the project and the decisions behind it.</p><p>That means clearer communication, fewer handovers and a solution shaped around a real business need—not a generic template.</p><a className="button button--secondary" href="/about">About ARS Tech Solutions <ArrowRight /></a></div></div></section>
+  return <section className="section founder-section"><div className="container founder-section__grid">
+    {founder.photograph && <img className="founder-photo" src={founder.photograph} alt="Jhon Aries Tayao, Founder and Web Developer at ARS Tech Solutions" width="900" height="1125" loading="lazy" decoding="async" />}
+    <div className="founder-copy"><p className="eyebrow">Meet the Founder</p><h2>{founder.name}</h2><p className="founder-role">{founder.role}</p><p>{founder.shortBiography}</p><a className="button button--secondary" href="/about">More About ARS <ArrowRight /></a></div>
+  </div></section>
 }

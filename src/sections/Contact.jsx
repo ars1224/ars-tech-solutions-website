@@ -1,5 +1,5 @@
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
 import { contactDetails, socialLinks } from '../data/siteData'
 import { trackEvent } from '../utils/analytics'
@@ -19,7 +19,7 @@ const contactContent = {
     asideText: 'No pressure and no confusing sales pitch—just a practical conversation about what will work for you or your business.',
     typeLabel: 'Service required',
     descriptionLabel: 'Short project description',
-    button: 'Book a Discovery Call',
+    button: 'Send My Request',
   },
   web: {
     eyebrow: 'Web project enquiries',
@@ -29,7 +29,7 @@ const contactContent = {
     asideText: 'Tell us what you want your website to achieve. We will explain the most practical scope, approach and next step.',
     typeLabel: 'Web service',
     descriptionLabel: 'Project details',
-    button: 'Book a Discovery Call',
+    button: 'Send My Request',
   },
   support: {
     eyebrow: 'Technology support enquiries',
@@ -39,7 +39,7 @@ const contactContent = {
     asideText: 'Explain what is happening and what you need working again. You will receive straightforward guidance without unnecessary jargon.',
     typeLabel: 'Support needed',
     descriptionLabel: 'Describe the issue',
-    button: 'Request Tech Support',
+    button: 'Send My Request',
   },
   about: {
     eyebrow: 'Contact ARS Tech Solutions',
@@ -49,7 +49,7 @@ const contactContent = {
     asideText: 'Your enquiry goes directly to the person who will discuss, plan and deliver the work with you.',
     typeLabel: 'Enquiry type',
     descriptionLabel: 'How can we help?',
-    button: 'Send My Enquiry',
+    button: 'Send My Request',
   },
 }
 
@@ -59,6 +59,8 @@ export default function Contact({ context = 'home' }) {
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const formRef = useRef(null)
+  const successRef = useRef(null)
   const content = contactContent[context] || contactContent.home
   const simpleWebEnquiry = context === 'home' || context === 'web'
   const typeOptions = context === 'web' ? webTypes : context === 'support' ? supportTypes : [...webTypes.slice(0, 5), ...supportTypes.slice(0, 5), 'Other']
@@ -78,7 +80,10 @@ export default function Contact({ context = 'home' }) {
     if (!form.description.trim()) next.description = 'Please tell us a little about your project.'
     if (!simpleWebEnquiry && !form.preference) next.preference = 'Please choose a contact method.'
     setErrors(next)
-    if (Object.keys(next).length) return
+    if (Object.keys(next).length) {
+      requestAnimationFrame(() => formRef.current?.querySelector('[aria-invalid="true"]')?.focus())
+      return
+    }
 
     setSubmitting(true)
     setSubmitError('')
@@ -97,6 +102,7 @@ export default function Contact({ context = 'home' }) {
       trackEvent(context === 'support' ? 'tech_support_enquiry' : 'project_enquiry_submission', { context })
       setSent(true)
       setForm(initial)
+      requestAnimationFrame(() => successRef.current?.focus())
     } catch {
       setSubmitError('We could not send your enquiry right now. Please try again or email contact@arstechsolutions.com.')
     } finally {
@@ -135,32 +141,32 @@ export default function Contact({ context = 'home' }) {
           </div>
           <div className="form-card">
             {sent ? (
-              <div className="success" role="status" tabIndex="-1">
+              <div className="success" role="status" tabIndex="-1" ref={successRef}>
                 <CheckCircle2 />
                 <h3>Thanks for getting in touch.</h3>
-                <p>Your enquiry has been sent successfully. We’ll be in touch as soon as possible.</p>
+                <p>Your request has been received. ARS Tech Solutions will review the details and contact you about the next step.</p>
                 <button className="button button--secondary" onClick={() => setSent(false)}>Send another message</button>
               </div>
             ) : (
-              <form name="contact" method="POST" data-netlify="true" onSubmit={submit} noValidate>
+              <form ref={formRef} name="contact" method="POST" data-netlify="true" onSubmit={submit} noValidate aria-busy={submitting}>
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="enquiry-context" value={context} />
                 <input type="hidden" name="bot-field" />
                 <div className="form-grid">
-                  <Field label="Full name" name="name" value={form.name} onChange={update} error={errors.name} required />
-                  <Field label="Email address" name="email" type="email" value={form.email} onChange={update} error={errors.email} required />
-                  {!simpleWebEnquiry && <Field label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} />}
-                  {!simpleWebEnquiry && <Field label="Business name" name="business" value={form.business} onChange={update} />}
+                  <Field label="Full name" name="name" autoComplete="name" value={form.name} onChange={update} error={errors.name} required />
+                  <Field label="Email address" name="email" type="email" inputMode="email" autoComplete="email" value={form.email} onChange={update} error={errors.email} required />
+                  {!simpleWebEnquiry && <Field label="Phone number" name="phone" type="tel" inputMode="tel" autoComplete="tel" value={form.phone} onChange={update} />}
+                  {!simpleWebEnquiry && <Field label="Business name" name="business" autoComplete="organization" value={form.business} onChange={update} />}
                   <Select label={content.typeLabel} name="type" value={form.type} onChange={update} options={typeOptions} error={errors.type} required />
                   {!simpleWebEnquiry && <Select label={context === 'support' ? 'Expected support budget' : 'Estimated budget'} name="budget" value={form.budget} onChange={update} options={budgetOptions} />}
                   <div className="field field--full">
                     <label htmlFor="description">{content.descriptionLabel} <span>*</span></label>
-                    <textarea id="description" name="description" rows="5" value={form.description} onChange={update} aria-invalid={!!errors.description} aria-describedby={errors.description ? 'description-error' : undefined} />
+                    <textarea id="description" name="description" rows="5" value={form.description} onChange={update} required aria-invalid={!!errors.description} aria-describedby={errors.description ? 'description-error' : undefined} />
                     {errors.description && <small className="field-error" id="description-error">{errors.description}</small>}
                   </div>
                   {!simpleWebEnquiry && <div className="field field--full">
                     <label htmlFor="preference">Preferred contact method <span>*</span></label>
-                    <select id="preference" name="preference" value={form.preference} onChange={update} aria-invalid={!!errors.preference} aria-describedby={errors.preference ? 'preference-error' : undefined}>
+                    <select id="preference" name="preference" value={form.preference} onChange={update} required aria-invalid={!!errors.preference} aria-describedby={errors.preference ? 'preference-error' : undefined}>
                       <option value="">Choose an option</option>
                       <option>Email</option>
                       <option>Phone</option>
@@ -172,7 +178,7 @@ export default function Contact({ context = 'home' }) {
                 </div>
                 {submitError && <p className="form-submit-error" role="alert">{submitError}</p>}
                 <button className="button form-submit" type="submit" disabled={submitting}>{submitting ? 'Sending…' : content.button} {!submitting && <ArrowRight />}</button>
-                <p className="form-note">Your information will only be used to respond to your enquiry.</p>
+                <p className="form-note">Your information will only be used to respond to your enquiry. Read our <a href="/privacy">Privacy page</a>.</p>
               </form>
             )}
           </div>
@@ -182,11 +188,11 @@ export default function Contact({ context = 'home' }) {
   )
 }
 
-function Field({ label, name, type = 'text', value, onChange, error, required }) {
+function Field({ label, name, type = 'text', value, onChange, error, required, autoComplete, inputMode }) {
   return (
     <div className="field">
       <label htmlFor={name}>{label} {required && <span>*</span>}</label>
-      <input id={name} name={name} type={type} value={value} onChange={onChange} aria-invalid={!!error} aria-describedby={error ? `${name}-error` : undefined} />
+      <input id={name} name={name} type={type} value={value} onChange={onChange} required={required} autoComplete={autoComplete} inputMode={inputMode} aria-invalid={!!error} aria-describedby={error ? `${name}-error` : undefined} />
       {error && <small className="field-error" id={`${name}-error`}>{error}</small>}
     </div>
   )
@@ -196,7 +202,7 @@ function Select({ label, name, value, onChange, options, error, required }) {
   return (
     <div className="field">
       <label htmlFor={name}>{label} {required && <span>*</span>}</label>
-      <select id={name} name={name} value={value} onChange={onChange} aria-invalid={!!error} aria-describedby={error ? `${name}-error` : undefined}>
+      <select id={name} name={name} value={value} onChange={onChange} required={required} aria-invalid={!!error} aria-describedby={error ? `${name}-error` : undefined}>
         <option value="">Choose an option</option>
         {options.map(option => <option key={option}>{option}</option>)}
       </select>

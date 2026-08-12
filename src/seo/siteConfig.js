@@ -26,8 +26,8 @@ export const pageConfig = {
     service: { name: 'Technology Support', description: 'Practical Windows, computer, device and small business IT support from Rolleston, Canterbury.' },
   },
   '/about': {
-    title: 'About ARS Tech Solutions | Rolleston, Canterbury',
-    description: 'Learn about ARS Tech Solutions, a Rolleston-based provider of practical web development and technology support for New Zealand businesses.',
+    title: 'About ARS Tech Solutions | Web Developer in Canterbury',
+    description: 'Meet Jhon Aries Tayao, founder and web developer at ARS Tech Solutions in Rolleston, Canterbury. Learn about the experience and approach behind our websites and custom web applications.',
     pageName: 'About ARS Tech Solutions',
   },
   '/work': {
@@ -40,6 +40,8 @@ export const pageConfig = {
     description: 'Interested in collaborating with ARS Tech Solutions? Join our network of independent web developers, designers, marketers and technology specialists.',
     pageName: 'Work With ARS Tech Solutions',
   },
+  '/privacy': { title: 'Privacy | ARS Tech Solutions', description: 'Learn what personal information ARS Tech Solutions collects through this website and how enquiry information is used.', pageName: 'Privacy' },
+  '/terms': { title: 'Website Terms | ARS Tech Solutions', description: 'Read the terms that apply when using the public ARS Tech Solutions website.', pageName: 'Website Terms' },
   ...Object.fromEntries(caseStudySeo.map(study => [`/work/${study.slug}`, {
     title: `${study.title} | ARS Tech Solutions Work`,
     description: study.overview,
@@ -63,11 +65,15 @@ export function structuredData(path) {
   const organization = {
     '@type': ['Organization', 'ProfessionalService'], '@id': `${siteUrl}/#organization`, name: 'ARS Tech Solutions', url: `${siteUrl}/`,
     logo: `${siteUrl}/apple-touch-icon.png`, image: socialImageUrl, email: 'contact@arstechsolutions.com', telephone: '+64 27 207 8245',
+    identifier: { '@type': 'PropertyValue', propertyID: 'NZBN', value: '9429053837134' },
     address: { '@type': 'PostalAddress', addressLocality: 'Rolleston', addressRegion: 'Canterbury', addressCountry: 'NZ' },
     areaServed: { '@type': 'Country', name: 'New Zealand' },
     sameAs: ['https://facebook.com/ARStechsolutions', 'https://www.instagram.com/ars.techsolutions/'],
   }
   const graph = [organization]
+  const person = { '@type': 'Person', '@id': `${siteUrl}/about#founder`, name: 'Jhon Aries Tayao', jobTitle: 'Founder & Web Developer', address: { '@type': 'PostalAddress', addressLocality: 'Rolleston', addressRegion: 'Canterbury', addressCountry: 'NZ' }, sameAs: ['https://www.linkedin.com/in/ariestayao/', 'https://github.com/ars1224'], worksFor: { '@id': `${siteUrl}/#organization` } }
+  organization.founder = { '@id': person['@id'] }
+  if (path === '/' || path === '/about') graph.push(person)
   if (path === '/') graph.push({ '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: `${siteUrl}/`, name: 'ARS Tech Solutions', description: page.description, publisher: { '@id': `${siteUrl}/#organization` }, inLanguage: 'en-NZ' })
   if (page.service) graph.push({ '@type': 'Service', '@id': `${canonical}#service`, name: page.service.name, description: page.service.description, url: canonical, provider: { '@id': `${siteUrl}/#organization` }, areaServed: { '@type': 'Country', name: 'New Zealand' } })
   if (page.caseStudy) graph.push({ '@type': 'CreativeWork', '@id': `${canonical}#project`, name: page.caseStudy.title, description: page.caseStudy.overview, url: canonical, creator: { '@id': `${siteUrl}/#organization` }, image: socialImageUrl, inLanguage: 'en-NZ' })
