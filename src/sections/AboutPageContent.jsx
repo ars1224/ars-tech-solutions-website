@@ -17,11 +17,12 @@ export default function AboutPageContent() {
         <p>I believe good technology should be clear, practical and shaped around the people who use it. When you work with ARS Tech Solutions, you work directly with me throughout your project—from the initial conversation and planning through development, launch and ongoing improvements.</p>
         <p>This direct approach means clearer communication, fewer handovers and a solution that stays connected to the original business goal.</p>
         <p className="founder-location"><MapPin /> Based in Rolleston, Canterbury · Available for projects across New Zealand</p>
-        <div className="founder-links"><a href={founder.linkedin} target="_blank" rel="noreferrer">LinkedIn <ExternalLink /></a><a href={founder.github} target="_blank" rel="noreferrer">GitHub <ExternalLink /></a></div>
+        <p className="founder-portfolio-note">Built by ARS is Jhon’s separate developer portfolio for additional development projects outside the ARS commercial case studies.</p>
+        <div className="founder-links"><a href={founder.developerPortfolio} target="_blank" rel="noopener noreferrer">Developer Portfolio <ExternalLink /></a><a href={founder.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <ExternalLink /></a><a href={founder.github} target="_blank" rel="noopener noreferrer">GitHub <ExternalLink /></a></div>
         <div className="button-row"><BookingLink /><a className="button button--secondary" href="/work">View Selected Work <ArrowRight /></a></div>
       </div>
     </div></section>
-    <section className="section section--tint credentials-section"><div className="container"><p className="eyebrow">Qualifications</p><div className="credentials-grid">{founder.qualifications.map(item => <article key={item.name}><h2>{item.name}</h2><p>{item.provider}</p><span>{item.status}</span></article>)}</div></div></section>
+    <section className="section section--tint credentials-section"><div className="container"><p className="eyebrow">Qualifications</p><h2>Training that supports the work</h2><div className="credentials-grid">{founder.qualifications.map(item => <article key={item.name}><h3>{item.name}</h3><p>{item.provider}</p><span>{item.status}</span></article>)}</div></div></section>
     <section className="section capabilities-section"><div className="container"><p className="eyebrow">Technical evidence</p><h2>Technical Capabilities</h2><p>My development experience includes:</p><div className="capability-chips">{capabilities.map(item => <span key={item}>{item}</span>)}</div><p>I also work with deployment and collaboration platforms including:</p><div className="capability-chips">{platforms.map(item => <span key={item}>{item}</span>)}</div></div></section>
   </>
 }

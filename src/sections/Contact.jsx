@@ -5,7 +5,7 @@ import { contactDetails, socialLinks } from '../data/siteData'
 import { trackEvent } from '../utils/analytics'
 
 const initial = { name: '', email: '', phone: '', business: '', type: '', budget: '', description: '', preference: '' }
-const webTypes = ['New business website', 'Website redesign', 'E-commerce website', 'Custom web application', 'Website maintenance', 'Other web project']
+const webTypes = ['One-page website', 'New business website', 'Website redesign', 'E-commerce website', 'Custom web application', 'Website maintenance', 'Other web project']
 const supportTypes = ['Windows reformat or setup', 'Computer troubleshooting', 'Internet or Wi-Fi help', 'Printer or device setup', 'Small business IT support', 'Other technology issue']
 const webBudgets = ['Under NZ$600', 'NZ$600–NZ$1,200', 'NZ$1,200–NZ$2,500', 'NZ$2,500–NZ$5,000', 'Over NZ$5,000', 'Not sure yet']
 const supportBudgets = ['Under NZ$100', 'NZ$100–NZ$250', 'NZ$250–NZ$500', 'Over NZ$500', 'Not sure yet']

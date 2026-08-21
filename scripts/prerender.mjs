@@ -11,12 +11,16 @@ const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;')
 
 for (const [path, page] of Object.entries(pageConfig)) {
   const canonical = canonicalUrl(path)
+  const rendered = render(path)
+  const preloadTags = rendered.match(/^(?:<link rel="preload"[^>]*\/>)+/)?.[0] || ''
+  const appMarkup = preloadTags ? rendered.slice(preloadTags.length) : rendered
   const metadata = `<title>${escape(page.title)}</title>
     <meta name="description" content="${escape(page.description)}" />
     <link rel="canonical" href="${canonical}" />
     <meta property="og:title" content="${escape(page.title)}" />
     <meta property="og:description" content="${escape(page.description)}" />
     <meta property="og:url" content="${canonical}" />
+    <meta property="og:type" content="${page.ogType || 'website'}" />
     <meta property="og:image" content="${socialImageUrl}" />
     <meta name="twitter:title" content="${escape(page.title)}" />
     <meta name="twitter:description" content="${escape(page.description)}" />
@@ -28,13 +32,14 @@ for (const [path, page] of Object.entries(pageConfig)) {
     .replace(/\s*<meta property="og:title"[^>]*>/, '')
     .replace(/\s*<meta property="og:description"[^>]*>/, '')
     .replace(/\s*<meta property="og:url"[^>]*>/, '')
+    .replace(/\s*<meta property="og:type"[^>]*>/, '')
     .replace(/\s*<meta property="og:image"[^>]*>/, '')
     .replace(/\s*<meta name="twitter:title"[^>]*>/, '')
     .replace(/\s*<meta name="twitter:description"[^>]*>/, '')
     .replace(/\s*<meta name="twitter:image"[^>]*>/, '')
-    .replace('<!--seo-head-->', metadata)
+    .replace('<!--seo-head-->', `${metadata}\n    ${preloadTags}`)
     .replace('<script id="structured-data" type="application/ld+json"></script>', `<script id="structured-data" type="application/ld+json">${JSON.stringify(structuredData(path)).replaceAll('<', '\\u003c')}</script>`)
-    .replace('<div id="root"></div>', `<div id="root">${render(path)}</div>`)
+    .replace('<div id="root"></div>', `<div id="root">${appMarkup}</div>`)
   const outputDir = path === '/' ? distDir : resolve(distDir, path.slice(1))
   await mkdir(outputDir, { recursive: true })
   await writeFile(resolve(outputDir, 'index.html'), output)

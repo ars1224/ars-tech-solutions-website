@@ -19,8 +19,22 @@ for (const path of Object.keys(pageConfig)) {
 
 const css = await readFile(resolve(source, 'styles/global.css'), 'utf8')
 check(css.includes('@media(prefers-reduced-motion:reduce)'), 'reduced-motion preferences remain supported')
+check(css.includes('body{margin:0;min-width:0;overflow-x:hidden}'), 'the document does not force overflow at 320px')
 check(css.includes('.menu-button{min-width:44px;min-height:44px}'), 'mobile menu target is at least 44px')
+check(css.includes('@media(max-width:840px){.site-header{height:70px}.menu-button{display:block}'), 'tablet header switches to the compact navigation before links become crowded')
 check(css.includes('.contact-socials a{min-height:44px}'), 'contact social targets are at least 44px')
+check(css.includes('.pricing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))'), 'desktop pricing uses four stable columns')
+check(css.includes('.service-paths,.services-grid,.projects-grid,.pricing-grid{grid-template-columns:1fr}'), 'mobile pricing collapses to one column')
+check(css.includes('.price-card h3,.price-purpose{min-height:0}'), 'mobile pricing removes desktop alignment constraints')
+check(css.includes('.footer .socials a{width:44px;height:44px!important}'), 'footer social links have 44px touch targets')
+
+const navigationSource = await readFile(resolve(source, 'data/siteData.js'), 'utf8')
+const navigationBlock = navigationSource.match(/export const navLinks = \[[\s\S]*?\n\]/)?.[0] || ''
+check(navigationBlock.includes("label: 'Pricing'"), 'shared navigation contains Pricing')
+check(!navigationBlock.includes('Work With ARS'), 'shared primary navigation excludes Work With ARS')
+const duplicateQuoteValue = `price: '${['Custom', 'Quote'].join(' ')}'`
+check(!navigationSource.includes(duplicateQuoteValue), 'pricing data has no duplicate custom-price value')
+for (const price of ['NZ$399', 'NZ$699', 'NZ$1,499', 'NZ$2,999']) check(navigationSource.includes(`price: '${price}'`), `pricing data contains ${price}`)
 
 const luminance = hex => {
   const values = hex.match(/[a-f\d]{2}/gi).map(value => parseInt(value, 16) / 255).map(value => value <= .03928 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)

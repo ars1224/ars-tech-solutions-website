@@ -8,8 +8,8 @@ import weddingBudgetImage from '../assets/projects/wedding-budget.webp'
 import zenfitImage from '../assets/projects/zenfit.webp'
 
 export const navLinks = [
-  { label: 'Home', href: '/' },
   { label: 'Web Development', href: '/web-development' },
+  { label: 'Pricing', href: '/web-development#pricing' },
   { label: 'Work', href: '/work' },
   { label: 'Tech Support', href: '/tech-support' },
   { label: 'About Us', href: '/about' },
@@ -68,9 +68,10 @@ export const processSteps = [
 ]
 
 export const pricing = [
-  { title: 'Starter Website', price: 'NZ$699', prefix: 'Starting from', suitable: ['Sole traders', 'New businesses', 'Personal services', 'Simple informational websites'], includes: ['Up to 3 pages', 'Mobile-responsive design', 'Contact form', 'Basic SEO setup', 'Social media links', 'One revision round'], button: 'Request a Quote' },
-  { title: 'Business Website', price: 'NZ$1,499', prefix: 'Starting from', popular: true, suitable: ['Small businesses', 'Tradespeople', 'Service providers', 'Growing businesses'], includes: ['Up to 6 pages', 'Custom responsive design', 'Contact or enquiry forms', 'Basic SEO setup', 'Google Maps integration', 'Analytics setup', 'Two revision rounds'], button: 'Request a Quote' },
-  { title: 'Custom Web Application', price: 'Custom Quote', prefix: 'Starting from NZ$2,999', suitable: ['Booking systems', 'Customer portals', 'Dashboards', 'Internal business tools', 'Database-driven applications'], includes: ['Requirements consultation', 'Custom interface', 'Database integration', 'User authentication when required', 'Testing and deployment', 'Ongoing support options'], button: 'Discuss Your Project' },
+  { title: 'One-Page Website', purpose: 'A simple professional online presence.', price: 'NZ$399', prefix: 'From', suitable: ['Sole traders', 'New businesses', 'Small local services', 'Businesses mainly relying on Facebook or Instagram'], includes: ['1 professionally designed scrolling page', 'Mobile-responsive design', 'About section', 'Services section', 'Contact or enquiry section', 'Social media links', 'Google Maps integration if required', 'Basic SEO setup', 'One revision round'], button: 'Request a Quote' },
+  { title: 'Starter Website', purpose: 'A small multi-page website.', price: 'NZ$699', prefix: 'From', suitable: ['Sole traders', 'New businesses', 'Personal services', 'Simple informational websites'], includes: ['Up to 3 pages', 'Mobile-responsive design', 'Contact form', 'Basic SEO setup', 'Social media links', 'One revision round'], button: 'Request a Quote' },
+  { title: 'Business Website', purpose: 'A complete website for an established or growing business.', price: 'NZ$1,499', prefix: 'From', popular: true, suitable: ['Small businesses', 'Tradespeople', 'Service providers', 'Growing businesses'], includes: ['Up to 6 pages', 'Custom responsive design', 'Contact or enquiry forms', 'Basic SEO setup', 'Google Maps integration', 'Analytics setup', 'Two revision rounds'], button: 'Request a Quote' },
+  { title: 'Custom Web Application', purpose: 'Custom functionality and systems for your business.', price: 'NZ$2,999', prefix: 'From', suitable: ['Booking systems', 'Dashboards', 'Inventory systems', 'Internal management systems', 'Customer portals', 'Custom workflows', 'Database-driven applications'], includes: ['Requirements consultation', 'Custom interface', 'Database integration', 'User authentication when required', 'Testing and deployment', 'Ongoing support options'], button: 'Discuss Your Project' },
 ]
 
 export const contactDetails = [
