@@ -18,6 +18,7 @@ export const founder = {
   ],
   linkedin: 'https://www.linkedin.com/in/ariestayao/',
   github: 'https://github.com/ars1224',
+  developerPortfolio: 'https://builtbyars.dev',
   location: 'Rolleston, Canterbury, New Zealand',
   philosophy: 'Clear communication, practical decisions and digital solutions shaped around real business needs.',
 }
