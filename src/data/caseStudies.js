@@ -37,7 +37,7 @@ export const caseStudies = [
     slug: 'noble-innsync-hotel-system',
     ...byTitle['Noble InnSync Hotel Booking System'],
     category: 'Development Project',
-    status: 'Live demo pending',
+    status: 'Live project',
     overview: 'A hotel management platform connecting guest bookings with room and operational management functions.',
     need: 'Hotel operations involve connected information across bookings, availability, payments, maintenance, inventory and staffing.',
     goals: ['Connect booking and room information', 'Support operational workflows', 'Create a consistent management interface'],
@@ -45,7 +45,7 @@ export const caseStudies = [
     approach: 'Related hotel activities were organised into one application so operational information could be managed through a consistent structure.',
     functionality: ['Guest bookings', 'Room availability', 'Payment records', 'Maintenance workflows', 'Inventory and staff operations'],
     challenges: 'A broad set of hotel workflows needed clear separation while still sharing related information.',
-    outcome: 'Completed as an academic development project. A public live demonstration is not currently available.',
+    outcome: 'Completed as an academic development project and now available as a public live demonstration.',
     relatedService: 'Custom Web Applications',
   },
 ]
