@@ -50,7 +50,7 @@ export const benefits = [
 ]
 
 export const projects = [
-  { category: 'Academic Project', title: 'KISS-Web Inventory and Warehouse Management System', description: 'A full-stack warehouse application for stock visibility, location tracking, order processing, product movement and operational reporting.', technologies: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'], image: kissWebImage, github: 'https://github.com/ars1224/Kiss-Web', status: 'Internal system — no public demo' },
+  { category: 'Custom Web Application', title: 'KISS-Web Inventory and Warehouse Management System', description: 'A responsive, database-backed warehouse application for inventory, pallets, orders, fulfilment, reporting and QR scanning.', technologies: ['PHP 8.2', 'MySQL', 'Apache', 'HTML', 'CSS', 'JavaScript'], image: kissWebImage, github: 'https://github.com/ars1224/Kiss-Web', status: 'Private internal application' },
   { category: 'Personal Project', title: 'Aries & Jade Digital Wedding Invitation', description: 'A personalised event website with wedding information, online RSVP confirmation, guest management and Google Sheets integration.', technologies: ['JavaScript', 'Node.js', 'Netlify Functions', 'Google Sheets API'], image: weddingInvitationImage, github: 'https://github.com/ars1224/JadeAries', liveUrl: 'https://ariesjadeweddinginvitation.netlify.app/' },
   { category: 'Academic Project', title: 'Explore NZ Tourism Website', description: 'A responsive tourism website for discovering New Zealand landmarks, cultural attractions, events and destinations through an interactive map.', technologies: ['HTML', 'CSS', 'JavaScript', 'Leaflet.js'], image: exploreNzImage, github: 'https://github.com/ars1224/Explore-NZ', status: 'No public live demo' },
   { category: 'Academic Project', title: 'Noble InnSync Hotel Booking System', description: 'A hotel management platform combining guest bookings, room availability, payments, maintenance, inventory and staff operations.', technologies: ['Python', 'Flask', 'SQLite', 'SQLAlchemy'], image: nobleInnSyncImage, github: 'https://github.com/ars1224/Noble_InnSync', liveUrl: 'https://noble-innsync.onrender.com/', status: 'Live project' },
@@ -60,18 +60,18 @@ export const projects = [
 ]
 
 export const processSteps = [
-  { title: 'Discovery', text: 'We discuss your business, goals, customers and required website features.', icon: Compass },
-  { title: 'Planning', text: 'We organise the page structure, content, features, timeline and project scope.', icon: LayoutTemplate },
-  { title: 'Design', text: 'We create a clean interface that matches your business and works across different screen sizes.', icon: PanelsTopLeft },
-  { title: 'Development', text: 'The approved design is developed, tested and prepared for launch.', icon: Braces },
-  { title: 'Launch & Support', text: 'Your website is checked, prepared for launch and supported with a clear path for future improvements.', icon: Rocket },
+  { title: 'Discovery', text: 'We learn about your business, customers, goals and what the website needs to achieve.', icon: Compass },
+  { title: 'Planning', text: 'We agree on the pages, content, features, scope and timeline.', icon: LayoutTemplate },
+  { title: 'Design', text: 'The page structure and interface are shaped for your brand and customers.', icon: PanelsTopLeft },
+  { title: 'Development', text: 'The approved design is built, tested and refined across screen sizes.', icon: Braces },
+  { title: 'Launch & Support', text: 'The website goes live with a clear plan for care and future improvements.', icon: Rocket },
 ]
 
 export const pricing = [
-  { title: 'One-Page Website', purpose: 'A simple professional online presence.', price: 'NZ$399', prefix: 'From', suitable: ['Sole traders', 'New businesses', 'Small local services', 'Businesses mainly relying on Facebook or Instagram'], includes: ['1 professionally designed scrolling page', 'Mobile-responsive design', 'About section', 'Services section', 'Contact or enquiry section', 'Social media links', 'Google Maps integration if required', 'Basic SEO setup', 'One revision round'], button: 'Request a Quote' },
-  { title: 'Starter Website', purpose: 'A small multi-page website.', price: 'NZ$699', prefix: 'From', suitable: ['Sole traders', 'New businesses', 'Personal services', 'Simple informational websites'], includes: ['Up to 3 pages', 'Mobile-responsive design', 'Contact form', 'Basic SEO setup', 'Social media links', 'One revision round'], button: 'Request a Quote' },
-  { title: 'Business Website', purpose: 'A complete website for an established or growing business.', price: 'NZ$1,499', prefix: 'From', popular: true, suitable: ['Small businesses', 'Tradespeople', 'Service providers', 'Growing businesses'], includes: ['Up to 6 pages', 'Custom responsive design', 'Contact or enquiry forms', 'Basic SEO setup', 'Google Maps integration', 'Analytics setup', 'Two revision rounds'], button: 'Request a Quote' },
-  { title: 'Custom Web Application', purpose: 'Custom functionality and systems for your business.', price: 'NZ$2,999', prefix: 'From', suitable: ['Booking systems', 'Dashboards', 'Inventory systems', 'Internal management systems', 'Customer portals', 'Custom workflows', 'Database-driven applications'], includes: ['Requirements consultation', 'Custom interface', 'Database integration', 'User authentication when required', 'Testing and deployment', 'Ongoing support options'], button: 'Discuss Your Project' },
+  { title: 'One-Page Website', purpose: 'A simple professional online presence.', price: 'NZ$399', prefix: 'From', suitable: ['Sole traders', 'New businesses', 'Small local services', 'Businesses mainly relying on Facebook or Instagram'], includes: ['1 professionally designed scrolling page', 'Mobile-responsive design', 'About section', 'Services section', 'Contact or enquiry section', 'Social media links', 'Google Maps integration if required', 'Basic SEO setup', 'One revision round'], button: 'Start Your Project' },
+  { title: 'Starter Website', purpose: 'A small multi-page website.', price: 'NZ$699', prefix: 'From', suitable: ['Sole traders', 'New businesses', 'Personal services', 'Simple informational websites'], includes: ['Up to 3 pages', 'Mobile-responsive design', 'Contact form', 'Basic SEO setup', 'Social media links', 'One revision round'], button: 'Start Your Project' },
+  { title: 'Business Website', purpose: 'A complete website for an established or growing business.', price: 'NZ$1,499', prefix: 'From', popular: true, suitable: ['Small businesses', 'Tradespeople', 'Service providers', 'Growing businesses'], includes: ['Up to 6 pages', 'Custom responsive design', 'Contact or enquiry forms', 'Basic SEO setup', 'Google Maps integration', 'Analytics setup', 'Two revision rounds'], button: 'Start Your Project' },
+  { title: 'Custom Web Application', purpose: 'Custom functionality and systems for your business.', price: 'NZ$2,999', prefix: 'From', suitable: ['Booking systems', 'Dashboards', 'Inventory systems', 'Internal management systems', 'Customer portals', 'Custom workflows', 'Database-driven applications'], includes: ['Requirements consultation', 'Custom interface', 'Database integration', 'User authentication when required', 'Testing and deployment', 'Ongoing support options'], button: 'Start Your Project' },
 ]
 
 export const contactDetails = [

@@ -9,7 +9,7 @@ export default function Navbar({ pathname: suppliedPathname }) {
   const pathname = suppliedPathname ?? (typeof window !== 'undefined' ? (window.location.pathname.replace(/\/$/, '') || '/') : '/')
   const hasContactSection = ['/', '/web-development', '/tech-support', '/about', '/work'].includes(pathname) || pathname.startsWith('/work/')
   const contextualLinks = navLinks.map(link => link.label === 'Contact' ? { ...link, href: hasContactSection ? '#contact' : '/#contact' } : link)
-  const consultationLabel = pathname === '/tech-support' ? 'Request Tech Support' : 'Request a Discovery Call'
+  const primaryCtaLabel = pathname === '/tech-support' ? 'Request Tech Support' : 'Let’s Chat'
   useEffect(() => {
     const close = (event) => event.key === 'Escape' && setOpen(false)
     window.addEventListener('keydown', close)
@@ -24,7 +24,7 @@ export default function Navbar({ pathname: suppliedPathname }) {
           <div className="nav__links">
             {contextualLinks.map(({label, href}) => <a key={`${label}-${href}`} href={href} aria-current={href === pathname ? 'page' : undefined} onClick={() => setOpen(false)}>{label}</a>)}
           </div>
-          {pathname === '/tech-support' ? <a className="button button--small" href="#contact" onClick={() => setOpen(false)}>{consultationLabel}</a> : <BookingLink className="button button--small" onClick={() => setOpen(false)}>{consultationLabel}</BookingLink>}
+          {pathname === '/tech-support' ? <a className="button button--small" href="#contact" onClick={() => setOpen(false)}>{primaryCtaLabel}</a> : <BookingLink className="button button--small" fallbackHref={hasContactSection ? '#contact' : '/#contact'} onClick={() => setOpen(false)}>{primaryCtaLabel}</BookingLink>}
         </nav>
       </div>
     </header>

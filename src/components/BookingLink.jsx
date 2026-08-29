@@ -1,7 +1,8 @@
-import { discoveryCallHref, siteSettings } from '../config/siteSettings'
+import { contactCtaHref, siteSettings } from '../config/siteSettings'
 
-export default function BookingLink({ children = 'Request a Discovery Call', className = 'button', eventName = 'discovery_call_click', onClick, ...props }) {
-  const external = Boolean(siteSettings.discoveryCallUrl)
+export default function BookingLink({ children, className = 'button', eventName = 'discovery_call_click', fallbackHref, onClick, ...props }) {
+  const external = Boolean(siteSettings.bookingUrl)
   const trackedEvent = className.includes('service-text-link') ? 'service_page_cta' : eventName
-  return <a className={className} href={discoveryCallHref()} data-event={trackedEvent} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined} onClick={onClick} {...props}>{children}</a>
+  const label = children ?? (external ? 'Book a Call' : 'Let’s Chat')
+  return <a className={className} href={contactCtaHref(fallbackHref)} data-event={trackedEvent} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined} onClick={onClick} {...props}>{label}</a>
 }

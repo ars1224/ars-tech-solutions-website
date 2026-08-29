@@ -1,40 +1,38 @@
-import { homeFaqs } from '../data/faqs.js'
-
 export const siteUrl = 'https://arstechsolutions.com'
 export const socialImageUrl = `${siteUrl}/og-image.png`
 
 const caseStudySeo = [
-  { slug: 'kiss-web-inventory-system', name: 'KISS-Web Inventory and Warehouse Management System', title: 'KISS-Web Inventory System | ARS Tech Solutions', description: 'See how the KISS-Web inventory and warehouse system was developed to support stock, location, order processing and operational reporting workflows.' },
-  { slug: 'digital-wedding-invitation', name: 'Aries & Jade Digital Wedding Invitation', title: 'Digital Wedding Invitation | ARS Tech Solutions Work', description: 'Explore a responsive digital wedding invitation combining clear guest information, online RSVP handling and Google Sheets integration.' },
-  { slug: 'noble-innsync-hotel-system', name: 'Noble InnSync Hotel Booking System', title: 'Noble InnSync Hotel System | ARS Tech Solutions', description: 'See how Noble InnSync connects hotel bookings, room availability, payment records, maintenance, inventory and staff workflows.' },
+  { slug: 'kiss-web-inventory-system', name: 'KISS-Web Inventory and Warehouse Management System', title: 'Warehouse Management System Case Study | ARS Tech Solutions', description: 'See how ARS planned and built KISS-Web, a responsive warehouse application for inventory, pallets, orders, fulfilment, reporting and QR scanning.', relatedService: 'Custom Web Applications', relatedServiceUrl: '/web-development#custom-web-applications' },
+  { slug: 'digital-wedding-invitation', name: 'Aries & Jade Digital Wedding Invitation', title: 'Digital Wedding Invitation Case Study | ARS Tech Solutions', description: 'See the design and development of a mobile-friendly wedding website with online RSVPs, guest management and Google Sheets integration.', relatedService: 'Business Websites', relatedServiceUrl: '/web-development#business-websites' },
+  { slug: 'noble-innsync-hotel-system', name: 'Noble InnSync Hotel Booking System', title: 'Hotel Booking System Case Study | ARS Tech Solutions', description: 'Explore a hotel management application connecting bookings, room availability, payments, maintenance, inventory and staff workflows.', relatedService: 'Custom Web Applications', relatedServiceUrl: '/web-development#custom-web-applications' },
 ]
 
 export const pageConfig = {
   '/': {
-    title: 'Web Design & Development NZ | ARS Tech Solutions',
-    description: 'ARS Tech Solutions builds professional websites and custom web applications for businesses in Canterbury and across New Zealand, with practical tech support.',
+    title: 'Web Design Rolleston & Christchurch | ARS Tech Solutions',
+    description: 'Founder-led web design and development in Rolleston, serving Christchurch, Canterbury and New Zealand with business websites, redesigns and custom web apps.',
     pageName: 'ARS Tech Solutions',
   },
   '/web-development': {
-    title: 'Web Development & Website Pricing NZ | ARS Tech Solutions',
-    description: 'Explore one-page websites, business websites, redesigns, custom web applications and ongoing website improvements for New Zealand businesses.',
+    title: 'Web Development & Website Design NZ | ARS Tech Solutions',
+    description: 'Business websites, website redesigns, custom web applications and website care from Rolleston for clients across Canterbury and New Zealand.',
     pageName: 'Web Development',
-    service: { name: 'Website and Web Application Development', description: 'Website development, custom web applications and ongoing website care for New Zealand businesses.' },
+    service: { name: 'Web Design and Development', serviceType: 'Website and web application development', description: 'Business websites, website redesigns, custom web applications and website care for New Zealand businesses.', audience: 'Small and growing New Zealand businesses' },
   },
   '/tech-support': {
     title: 'Tech Support Rolleston & Canterbury | ARS Tech Solutions',
-    description: 'Practical tech support in Rolleston and Canterbury for Windows setup, slow computers, software, email, devices and small business IT.',
+    description: 'Local tech support in Rolleston and Canterbury for Windows setup, slow computers, software, email, devices and everyday small-business IT.',
     pageName: 'Tech Support',
-    service: { name: 'Technology Support', description: 'Practical Windows, computer, device and small business IT support from Rolleston, Canterbury.' },
+    service: { name: 'Technology Support', serviceType: 'Computer and small-business IT support', description: 'Windows, computer, device and small-business IT support from Rolleston, Canterbury.', audience: 'People and small businesses in Canterbury' },
   },
   '/about': {
-    title: 'About ARS Tech Solutions | Web Developer in Canterbury',
-    description: 'Meet Jhon Aries Tayao, founder of ARS Tech Solutions in Rolleston, and learn how direct, practical web development supports businesses across New Zealand.',
+    title: 'About ARS Tech Solutions | Rolleston Web Developer',
+    description: 'Meet Jhon Aries Tayao, the Rolleston web developer behind ARS Tech Solutions, serving businesses across Canterbury and New Zealand.',
     pageName: 'About ARS Tech Solutions',
   },
   '/work': {
-    title: 'Web Development Portfolio NZ | ARS Tech Solutions',
-    description: 'Explore ARS Tech Solutions case studies covering responsive websites, business interfaces and custom web applications developed in New Zealand.',
+    title: 'Website & Web App Case Studies | ARS Tech Solutions',
+    description: 'Explore ARS Tech Solutions case studies covering business websites, responsive interfaces and custom web applications built in New Zealand.',
     pageName: 'Work',
   },
   '/work-with-us': {
@@ -65,32 +63,62 @@ export function canonicalUrl(path) {
 export function structuredData(path) {
   const page = pageConfig[path]
   const canonical = canonicalUrl(path)
+  const organizationId = `${siteUrl}/#organization`
+  const websiteId = `${siteUrl}/#website`
+  const founderId = `${siteUrl}/about#founder`
+  const serviceArea = [
+    { '@type': 'Place', name: 'Rolleston' },
+    { '@type': 'City', name: 'Christchurch' },
+    { '@type': 'AdministrativeArea', name: 'Canterbury' },
+    { '@type': 'Country', name: 'New Zealand' },
+  ]
+  const serviceCatalog = [
+    ['Business Websites', '/web-development#business-websites'],
+    ['Website Redesigns', '/web-development#website-redesigns'],
+    ['Custom Web Applications', '/web-development#custom-web-applications'],
+    ['Website Care and Improvements', '/web-development#website-care'],
+    ['Technology Support', '/tech-support'],
+  ]
   const organization = {
-    '@type': ['Organization', 'ProfessionalService'], '@id': `${siteUrl}/#organization`, name: 'ARS Tech Solutions', url: `${siteUrl}/`,
-    logo: `${siteUrl}/apple-touch-icon.png`, image: socialImageUrl, email: 'contact@arstechsolutions.com', telephone: '+64 27 207 8245',
+    '@type': ['Organization', 'ProfessionalService'], '@id': organizationId, name: 'ARS Tech Solutions', url: `${siteUrl}/`,
+    description: 'Founder-led web design and development from Rolleston for businesses across Canterbury and New Zealand.',
+    logo: `${siteUrl}/ars-tech-solutions-logo.png`, image: socialImageUrl, email: 'contact@arstechsolutions.com', telephone: '+64 27 207 8245',
     identifier: { '@type': 'PropertyValue', propertyID: 'NZBN', value: '9429053837134' },
     address: { '@type': 'PostalAddress', addressLocality: 'Rolleston', addressRegion: 'Canterbury', addressCountry: 'NZ' },
-    areaServed: [
-      { '@type': 'Place', name: 'Rolleston' },
-      { '@type': 'AdministrativeArea', name: 'Selwyn' },
-      { '@type': 'City', name: 'Christchurch' },
-      { '@type': 'AdministrativeArea', name: 'Canterbury' },
-      { '@type': 'Country', name: 'New Zealand' },
-    ],
+    areaServed: serviceArea,
+    founder: { '@id': founderId },
+    knowsAbout: ['Web design', 'Web development', 'Business websites', 'Website redesigns', 'Custom web applications', 'Website care'],
+    contactPoint: { '@type': 'ContactPoint', contactType: 'customer enquiries', telephone: '+64 27 207 8245', email: 'contact@arstechsolutions.com', areaServed: 'NZ', availableLanguage: 'English' },
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'ARS Tech Solutions services', itemListElement: serviceCatalog.map(([name, href]) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name, url: `${siteUrl}${href}`, provider: { '@id': organizationId } } })) },
     sameAs: ['https://facebook.com/ARStechsolutions', 'https://www.instagram.com/ars.techsolutions/'],
   }
-  const graph = [organization]
-  const person = { '@type': 'Person', '@id': `${siteUrl}/about#founder`, name: 'Jhon Aries Tayao', jobTitle: 'Founder & Web Developer', url: 'https://builtbyars.dev', address: { '@type': 'PostalAddress', addressLocality: 'Rolleston', addressRegion: 'Canterbury', addressCountry: 'NZ' }, sameAs: ['https://builtbyars.dev', 'https://www.linkedin.com/in/ariestayao/', 'https://github.com/ars1224'], worksFor: { '@id': `${siteUrl}/#organization` } }
-  organization.founder = { '@id': person['@id'] }
-  if (path === '/' || path === '/about') graph.push(person)
-  if (path === '/') graph.push({ '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: `${siteUrl}/`, name: 'ARS Tech Solutions', description: page.description, publisher: { '@id': `${siteUrl}/#organization` }, inLanguage: 'en-NZ' })
-  if (path === '/') graph.push({ '@type': 'FAQPage', '@id': `${siteUrl}/#faq`, mainEntity: homeFaqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) })
-  if (page.service) graph.push({ '@type': 'Service', '@id': `${canonical}#service`, name: page.service.name, description: page.service.description, url: canonical, provider: { '@id': `${siteUrl}/#organization` }, areaServed: { '@type': 'Country', name: 'New Zealand' } })
-  if (page.caseStudy) graph.push({ '@type': 'CreativeWork', '@id': `${canonical}#project`, name: page.caseStudy.name, description: page.description, url: canonical, creator: { '@id': `${siteUrl}/#organization` }, image: socialImageUrl, inLanguage: 'en-NZ' })
-  if (path !== '/') graph.push({ '@type': 'BreadcrumbList', '@id': `${canonical}#breadcrumb`, itemListElement: [
+  const website = { '@type': 'WebSite', '@id': websiteId, url: `${siteUrl}/`, name: 'ARS Tech Solutions', publisher: { '@id': organizationId }, inLanguage: 'en-NZ' }
+  const person = { '@type': 'Person', '@id': founderId, name: 'Jhon Aries Tayao', jobTitle: 'Founder & Web Developer', url: `${siteUrl}/about`, image: `${siteUrl}/jhon-aries-tayao.jpg`, alumniOf: { '@type': 'EducationalOrganization', name: 'Yoobee Colleges' }, address: { '@type': 'PostalAddress', addressLocality: 'Rolleston', addressRegion: 'Canterbury', addressCountry: 'NZ' }, sameAs: ['https://builtbyars.dev', 'https://www.linkedin.com/in/ariestayao/', 'https://github.com/ars1224'], worksFor: { '@id': organizationId } }
+  const breadcrumb = path === '/' ? null : { '@type': 'BreadcrumbList', '@id': `${canonical}#breadcrumb`, itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
     ...(page.caseStudy ? [{ '@type': 'ListItem', position: 2, name: 'Work', item: `${siteUrl}/work` }] : []),
     { '@type': 'ListItem', position: page.caseStudy ? 3 : 2, name: page.pageName, item: canonical },
-  ] })
+  ] }
+  const webPage = {
+    '@type': path === '/about' ? 'AboutPage' : path === '/work' ? 'CollectionPage' : 'WebPage',
+    '@id': `${canonical}#webpage`, url: canonical, name: page.pageName, headline: page.title, description: page.description,
+    isPartOf: { '@id': websiteId }, about: { '@id': organizationId }, publisher: { '@id': organizationId }, inLanguage: 'en-NZ',
+    ...(breadcrumb ? { breadcrumb: { '@id': breadcrumb['@id'] } } : {}),
+  }
+  const graph = [organization, website, webPage]
+  if (path === '/' || path === '/about') graph.push(person)
+  if (path === '/') webPage.mainEntity = { '@id': organizationId }
+  if (path === '/about') webPage.mainEntity = { '@id': founderId }
+  if (page.service) {
+    const serviceId = `${canonical}#service`
+    webPage.mainEntity = { '@id': serviceId }
+    graph.push({ '@type': 'Service', '@id': serviceId, name: page.service.name, serviceType: page.service.serviceType, description: page.service.description, url: canonical, provider: { '@id': organizationId }, areaServed: serviceArea, audience: { '@type': 'Audience', audienceType: page.service.audience } })
+  }
+  if (page.caseStudy) {
+    const projectId = `${canonical}#project`
+    webPage.mainEntity = { '@id': projectId }
+    graph.push({ '@type': 'CreativeWork', '@id': projectId, name: page.caseStudy.name, description: page.description, url: canonical, creator: { '@id': organizationId }, about: { '@type': 'Service', name: page.caseStudy.relatedService, url: `${siteUrl}${page.caseStudy.relatedServiceUrl}` }, inLanguage: 'en-NZ' })
+  }
+  if (breadcrumb) graph.push(breadcrumb)
   return { '@context': 'https://schema.org', '@graph': graph }
 }

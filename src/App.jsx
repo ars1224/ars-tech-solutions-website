@@ -59,7 +59,6 @@ export default function App({ pathname: suppliedPathname }) {
       if (explicit) trackEvent(explicit, { href, label, path: pathname })
       else if (href.startsWith('tel:')) trackEvent('phone_click', { href, path: pathname })
       else if (href.startsWith('mailto:')) trackEvent('email_click', { href, path: pathname })
-      else if (label.includes('Request a Discovery Call')) trackEvent('discovery_call_click', { href, path: pathname })
       else if (href === '/web-development' || href.startsWith('/web-development#')) trackEvent('service_page_cta', { href, label, path: pathname })
     }
     document.addEventListener('click', trackClick)

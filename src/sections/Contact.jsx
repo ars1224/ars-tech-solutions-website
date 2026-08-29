@@ -12,44 +12,54 @@ const supportBudgets = ['Under NZ$100', 'NZ$100–NZ$250', 'NZ$250–NZ$500', 'O
 
 const contactContent = {
   home: {
-    eyebrow: 'Start your web project',
-    title: 'Let’s talk about what you want to build',
-    text: 'Share a few details about your website or digital tool. ARS Tech Solutions will review the project and recommend a practical next step.',
-    asideTitle: 'Let’s make your next step clear.',
-    asideText: 'No pressure and no confusing sales pitch—just a practical conversation about what will work for you or your business.',
+    eyebrow: 'Let’s chat',
+    title: 'Tell me about your website or web app',
+    text: 'Share what you want to build or improve. I’ll reply with a practical next step.',
+    asideTitle: 'Direct, practical advice.',
+    asideText: 'Your enquiry goes straight to the developer who will plan and build the work.',
     typeLabel: 'Service required',
     descriptionLabel: 'Short project description',
-    button: 'Send My Request',
+    button: 'Let’s Chat',
   },
   web: {
-    eyebrow: 'Web project enquiries',
-    title: 'Tell us about your website project',
-    text: 'Share your business goals, the type of website or application you need, and where you are in the planning process.',
-    asideTitle: 'Let’s make your website plan clear.',
-    asideText: 'Tell us what you want your website to achieve. We will explain the most practical scope, approach and next step.',
+    eyebrow: 'Free consultation',
+    title: 'Not sure what your website needs?',
+    text: 'Tell me about your goals and current website. We can work through the useful options with no obligation.',
+    asideTitle: 'Ready to move forward?',
+    asideText: 'Share the project, budget range and any deadline. I’ll help define the next step.',
     typeLabel: 'Web service',
     descriptionLabel: 'Project details',
-    button: 'Send My Request',
+    button: 'Start Your Project',
+  },
+  work: {
+    eyebrow: 'Start your project',
+    title: 'Have a website or web application in mind?',
+    text: 'Tell me about the problem, the people who will use it and what a useful result looks like.',
+    asideTitle: 'Turn the idea into a clear next step.',
+    asideText: 'I’ll review the requirements, ask any useful questions and help define the scope.',
+    typeLabel: 'Web service',
+    descriptionLabel: 'Project details',
+    button: 'Start Your Project',
   },
   support: {
     eyebrow: 'Technology support enquiries',
     title: 'Need help with your technology?',
-    text: 'Describe the device, problem or setup you need help with, and we will recommend the clearest next step.',
+    text: 'Describe the device, problem or setup. I’ll recommend the clearest next step.',
     asideTitle: 'Let’s get the problem sorted.',
-    asideText: 'Explain what is happening and what you need working again. You will receive straightforward guidance without unnecessary jargon.',
+    asideText: 'Explain what is happening and what you need working again. You’ll receive straightforward guidance without the jargon.',
     typeLabel: 'Support needed',
     descriptionLabel: 'Describe the issue',
     button: 'Send My Request',
   },
   about: {
-    eyebrow: 'Contact ARS Tech Solutions',
-    title: 'Let’s start a straightforward conversation',
-    text: 'Whether you are planning a digital project or need practical technology support, tell us what you have in mind.',
-    asideTitle: 'Work directly with ARS Tech Solutions.',
-    asideText: 'Your enquiry goes directly to the person who will discuss, plan and deliver the work with you.',
+    eyebrow: 'Let’s chat',
+    title: 'Have a project in mind?',
+    text: 'Tell me what you want to build, redesign or improve.',
+    asideTitle: 'Work directly with the developer.',
+    asideText: 'I’ll discuss the project with you, define the scope and stay involved through delivery.',
     typeLabel: 'Enquiry type',
     descriptionLabel: 'How can we help?',
-    button: 'Send My Request',
+    button: 'Let’s Chat',
   },
 }
 
@@ -63,7 +73,7 @@ export default function Contact({ context = 'home' }) {
   const successRef = useRef(null)
   const content = contactContent[context] || contactContent.home
   const simpleWebEnquiry = context === 'home' || context === 'web'
-  const typeOptions = context === 'web' ? webTypes : context === 'support' ? supportTypes : [...webTypes.slice(0, 5), ...supportTypes.slice(0, 5), 'Other']
+  const typeOptions = context === 'web' || context === 'work' ? webTypes : context === 'support' ? supportTypes : [...webTypes.slice(0, 5), ...supportTypes.slice(0, 5), 'Other']
   const budgetOptions = context === 'support' ? supportBudgets : webBudgets
 
   const update = event => {
@@ -144,7 +154,7 @@ export default function Contact({ context = 'home' }) {
               <div className="success" role="status" tabIndex="-1" ref={successRef}>
                 <CheckCircle2 />
                 <h3>Thanks for getting in touch.</h3>
-                <p>Your request has been received. ARS Tech Solutions will review the details and contact you about the next step.</p>
+                <p>Your enquiry has been received. I’ll review the details and contact you about the next step.</p>
                 <button className="button button--secondary" onClick={() => setSent(false)}>Send another message</button>
               </div>
             ) : (

@@ -6,17 +6,18 @@ export const caseStudies = [
   {
     slug: 'kiss-web-inventory-system',
     ...byTitle['KISS-Web Inventory and Warehouse Management System'],
-    category: 'Development Project',
-    status: 'Internal system — no public demo',
-    overview: 'A full-stack warehouse application focused on stock visibility, product movement and day-to-day operational records.',
+    category: 'Custom Web Application',
+    status: 'Private internal application',
+    overview: 'A responsive, database-backed warehouse-management application for inventory, pallets, orders, fulfilment, reporting and QR scanning.',
     need: 'Warehouse teams need a dependable way to see stock, understand where products are located and record movement through operational workflows.',
     goals: ['Centralise product and stock information', 'Support location and movement tracking', 'Make order processing and reporting easier to follow'],
     role: 'Application planning, interface design, full-stack development and database implementation.',
     approach: 'The system was structured around key warehouse activities, with screens and data relationships organised to keep common tasks clear.',
     functionality: ['Stock visibility', 'Location tracking', 'Order processing', 'Product movement records', 'Operational reporting'],
     challenges: 'Multiple warehouse activities and data relationships needed to remain understandable within one connected application.',
-    outcome: 'Completed as an internal academic development project. There is no public production deployment.',
+    outcome: 'Developed as a private internal warehouse-management application.',
     relatedService: 'Custom Web Applications',
+    relatedServiceHref: '/web-development#custom-web-applications',
   },
   {
     slug: 'digital-wedding-invitation',
@@ -32,6 +33,7 @@ export const caseStudies = [
     challenges: 'The project needed to combine a personal visual experience with dependable form and guest-data handling.',
     outcome: 'Live personal project with a public demonstration available.',
     relatedService: 'Business Websites',
+    relatedServiceHref: '/web-development#business-websites',
   },
   {
     slug: 'noble-innsync-hotel-system',
@@ -47,6 +49,7 @@ export const caseStudies = [
     challenges: 'A broad set of hotel workflows needed clear separation while still sharing related information.',
     outcome: 'Completed as an academic development project and now available as a public live demonstration.',
     relatedService: 'Custom Web Applications',
+    relatedServiceHref: '/web-development#custom-web-applications',
   },
 ]
 
