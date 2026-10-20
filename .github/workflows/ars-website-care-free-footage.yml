@@ -1,0 +1,42 @@
+name: ARS Website Care Source Footage
+on:
+  push:
+    branches: [tools/ars-free-website-care-footage-20261020]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  download-stock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Fetch commercially licensed footage from Mixkit
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p stock
+          for row in '25575|problem-owner-frustrated' '41659|technical-work-portrait' '41643|technician-keyboard' '41647|technician-checking' '251|customer-laptop' '42654|customer-verifying'; do
+            id=${row%%|*}
+            slug=${row##*|}
+            success=0
+            for res in 1080 720; do
+              url="https://assets.mixkit.co/videos/$id/$id-$res.mp4"
+              if curl -fLsS --connect-timeout 15 --max-time 70 --retry 1 "$url" -o "stock/$slug.mp4" && ffprobe -v error "stock/$slug.mp4" >/dev/null 2>&1; then
+                echo "Downloaded $slug from $url"
+                success=1
+                break
+              fi
+              rm -f "stock/$slug.mp4"
+            done
+            if [ "$success" = 0 ]; then echo "UNAVAILABLE $slug"; fi
+          done
+          printf '%s\n' 'Mixkit Stock Video Free License: https://mixkit.co/license/modal/videoFree/' > stock/LICENSE_SOURCES.txt
+          printf '%s\n' '25575: https://mixkit.co/free-stock-video/young-very-frustrated-woman-in-front-of-her-computer-25575/' '41659: https://mixkit.co/free-stock-video/programmer-working-on-his-computer-41659/' '41643: https://mixkit.co/free-stock-video/experienced-programmer-working-on-a-computer-41643/' '41647: https://mixkit.co/free-stock-video/professional-programmer-working-on-a-large-computer-41647/' '251: https://mixkit.co/free-stock-video/woman-working-on-a-laptop-251/' '42654: https://mixkit.co/free-stock-video/business-woman-concentrating-on-her-laptop-42654/' >> stock/LICENSE_SOURCES.txt
+          find stock -maxdepth 1 -type f -printf '%f %s bytes\n'
+          test "$(find stock -maxdepth 1 -name '*.mp4' | wc -l)" -ge 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: website-care-source-footage
+          path: stock/
+          retention-days: 1
+          if-no-files-found: error
